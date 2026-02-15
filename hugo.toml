@@ -1,0 +1,73 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'Simon Arnost'
+theme = 'papermod'
+
+copyright = '© Simon Arnost'
+
+[pagination]
+  pagerSize = 10
+
+[params]
+  description = 'Personal site and blog'
+  author = 'Simon Arnost'
+  defaultTheme = 'dark'
+  disableThemeToggle = false
+  ShowReadingTime = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+
+  [params.profileMode]
+    enabled = true
+    title = 'Simon Arnost'
+    subtitle = 'Personal site and blog'
+    imageUrl = ''
+    imageWidth = 120
+    imageHeight = 120
+
+    [[params.profileMode.buttons]]
+      name = 'Posts'
+      url = '/posts/'
+
+    [[params.profileMode.buttons]]
+      name = 'About'
+      url = '/about/'
+
+    [[params.profileMode.buttons]]
+      name = 'Tags'
+      url = '/tags/'
+
+  [[params.socialIcons]]
+    name = 'github'
+    url = 'https://github.com/'
+
+  [[params.socialIcons]]
+    name = 'rss'
+    url = '/index.xml'
+
+[[menu.main]]
+  name = 'Home'
+  url = '/'
+  weight = 1
+
+[[menu.main]]
+  name = 'Posts'
+  url = '/posts/'
+  weight = 2
+
+[[menu.main]]
+  name = 'About'
+  url = '/about/'
+  weight = 3
+
+[[menu.main]]
+  name = 'Tags'
+  url = '/tags/'
+  weight = 4
+
+[taxonomies]
+  tag = 'tags'
+
+[markup.highlight]
+  noClasses = false
