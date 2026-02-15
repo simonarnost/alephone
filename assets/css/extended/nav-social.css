@@ -1,0 +1,25 @@
+.nav-separator {
+    list-style: none;
+    color: var(--secondary);
+    user-select: none;
+    line-height: var(--header-height);
+}
+
+.nav-social {
+    line-height: var(--header-height);
+    display: inline-flex;
+    align-items: center;
+    height: var(--header-height);
+}
+
+.nav-social svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--secondary);
+    transition: fill 0.2s;
+    transform: translateY(0.15em);
+}
+
+.nav-social:hover svg {
+    fill: var(--primary);
+}

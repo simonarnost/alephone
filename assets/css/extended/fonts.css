@@ -1,0 +1,7 @@
+/* Switch font by changing this line: */
+/* Options: 'Inter', 'Space Grotesk', 'IBM Plex Sans', 'Outfit', 'JetBrains Mono' */
+
+body {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 18px;
+}

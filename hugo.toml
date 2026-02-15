@@ -18,28 +18,33 @@ copyright = '© Simon Arnost'
   ShowBreadCrumbs = true
   ShowCodeCopyButtons = true
 
-  [params.profileMode]
-    enabled = true
-    title = 'Simon Arnost'
-    subtitle = 'Personal site and blog'
-    imageUrl = ''
-    imageWidth = 120
-    imageHeight = 120
+  homeImage = '/images/prof_pic.jpeg'
 
-    [[params.profileMode.buttons]]
-      name = 'CV'
-      url = '/cv/'
+  [params.label]
+    text = ' '
+
+  [params.homeInfoParams]
+    Title = ''
+    Content = """Hi! I am Simon Arnost, a Software Engineer at [Make](https://www.make.com). Based in Prague, Czech Republic.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."""
 
   [[params.socialIcons]]
     name = 'github'
-    url = 'https://github.com/'
+    url = 'https://github.com/simonarnost'
 
   [[params.socialIcons]]
-    name = 'rss'
-    url = '/index.xml'
+    name = 'linkedin'
+    url = 'https://www.linkedin.com/in/simonarnost'
+
+  [[params.socialIcons]]
+    name = 'email'
+    url = 'mailto:arnost.simon@gmail.com'
 
 [[menu.main]]
-  name = 'Home'
+  name = 'About'
   url = '/'
   weight = 1
 
@@ -48,10 +53,7 @@ copyright = '© Simon Arnost'
   url = '/cv/'
   weight = 2
 
-[[menu.main]]
-  name = 'Contact'
-  url = '/contact/'
-  weight = 3
+
 
 [taxonomies]
   tag = 'tags'
