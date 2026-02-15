@@ -15,19 +15,19 @@
                         <div class="cv-dates">2024 - Present</div>
                         <div class="cv-type">Software Engineer</div>
                     </div>
-                    <div class="cv-role">
-                        <div class="cv-dates">2021 - 2024</div>
-                        <div class="cv-type">Junior Software Engineer</div>
-                    </div>
-                    <div class="cv-role">
-                        <div class="cv-dates">2021 - 2022</div>
-                        <div class="cv-type">QA Engineer</div>
-                    </div>
                     <div class="cv-description">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Sed do eiusmod tempor incididunt ut labore et dolore
                         magna aliqua. Ut enim ad minim veniam, quis nostrud
                         exercitation ullamco laboris.
+                    </div>
+                    <div class="cv-role">
+                        <div class="cv-dates">2022 - 2024</div>
+                        <div class="cv-type">Junior Software Engineer</div>
+                    </div>
+                    <div class="cv-role">
+                        <div class="cv-dates">2021 - 2022</div>
+                        <div class="cv-type">QA Engineer</div>
                     </div>
                 </div>
                 <div class="cv-entry">
@@ -36,7 +36,6 @@
                         <div class="cv-dates">2019 - 2020</div>
                         <div class="cv-type">Junior Web Developer</div>
                     </div>
-
                     <div class="cv-description">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Duis aute irure dolor in reprehenderit in voluptate
@@ -152,7 +151,8 @@
     }
 
     .cv-description {
-        margin-top: 0.5em;
+        margin-top: 0.2em;
+        margin-bottom: 0.8em;
         padding: 0.5em 1em;
         max-width: 30em;
         background: var(--code-bg);
@@ -170,7 +170,7 @@
         }
         .cv-section-content {
             margin-left: 0;
-            padding-left: 1em;
+            padding-left: 0;
         }
         .cv-dates {
             float: none;
@@ -179,6 +179,9 @@
         }
         .cv-name {
             font-size: 2em;
+        }
+        .cv-description {
+            max-width: none;
         }
     }
 </style>

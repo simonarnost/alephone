@@ -38,6 +38,7 @@
 .bio-text .entry-content {
     margin-top: 0;
     line-height: 1.8;
+    color: var(--secondary);
 }
 
 .bio-text .entry-content p:first-child {
