@@ -18,7 +18,7 @@ copyright = '© Simon Arnost'
   ShowBreadCrumbs = true
   ShowCodeCopyButtons = true
 
-  homeImage = '/images/prof_pic.jpeg'
+  homeImage = 'images/prof_pic.jpeg'
 
   [params.label]
     text = ' '

@@ -3,7 +3,7 @@
     <div class="bio-container">
         {{- with site.Params.homeImage }}
         <div class="bio-photo">
-            <img src="{{ . | relURL }}" alt="{{ site.Title }}" />
+            <img src="{{ . | absURL }}" alt="{{ site.Title }}" />
         </div>
         {{- end }}
         <div class="bio-text">
