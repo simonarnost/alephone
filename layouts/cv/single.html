@@ -1,0 +1,186 @@
+{{- define "main" }}
+
+<article class="post-single cv-page">
+    <header class="post-header">
+        <h1 class="cv-name">
+            <span class="cv-first-name">Simon</span>
+            <span class="cv-last-name">Arnost</span>
+            <span class="cv-headline">Curriculum Vitae</span>
+        </h1>
+    </header>
+
+    <div class="cv-content">
+        <div class="cv-section">
+            <h2>Professional experience</h2>
+            <div class="cv-section-content">
+                <div class="cv-entry">
+                    <div class="cv-title">Make</div>
+                    <div class="cv-role">
+                        <div class="cv-dates">2024 - Present</div>
+                        <div class="cv-type">Software Engineer</div>
+                    </div>
+                    <div class="cv-role">
+                        <div class="cv-dates">2021 - 2024</div>
+                        <div class="cv-type">Junior Software Engineer</div>
+                    </div>
+                    <div class="cv-role">
+                        <div class="cv-dates">2021 - 2022</div>
+                        <div class="cv-type">QA Engineer</div>
+                    </div>
+                    <div class="cv-description">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris.
+                    </div>
+                </div>
+                <div class="cv-entry">
+                    <div class="cv-title">Greyson</div>
+                    <div class="cv-role">
+                        <div class="cv-dates">2019 - 2020</div>
+                        <div class="cv-type">Junior Web Developer</div>
+                    </div>
+
+                    <div class="cv-description">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Duis aute irure dolor in reprehenderit in voluptate
+                        velit esse cillum dolore eu fugiat nulla pariatur.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cv-section">
+            <h2>Education</h2>
+            <div class="cv-section-content">
+                <div class="cv-entry">
+                    <div class="cv-title">FIT ČVUT v Praze</div>
+                    <div class="cv-dates">Graduated 2025</div>
+                    <div class="cv-type">
+                        Bachelor's degree, Computer Software Engineering
+                    </div>
+                </div>
+                <div class="cv-entry">
+                    <div class="cv-title">Gymnázium Třeboň</div>
+                    <div class="cv-dates">2014 - 2018</div>
+                    <div class="cv-type">High school</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<style>
+    .cv-name {
+        font-size: 2.5em;
+        font-weight: normal;
+        margin-top: 0;
+        color: var(--primary);
+    }
+    .cv-first-name,
+    .cv-last-name {
+        margin-right: 0.15em;
+    }
+    .cv-headline {
+        display: block;
+        font-size: 0.45em;
+        color: var(--secondary);
+        margin-top: 0.2em;
+    }
+
+    .cv-section {
+        clear: both;
+        overflow: hidden;
+        padding-bottom: 1.5em;
+        margin-bottom: 1.5em;
+        border-bottom: 2px solid var(--border);
+    }
+    .cv-section:last-child {
+        margin-bottom: 0;
+        border-bottom: none;
+    }
+
+    .cv-section h2 {
+        float: left;
+        width: 22%;
+        text-align: right;
+        font-weight: normal;
+        color: var(--secondary);
+        border-bottom: none;
+        margin: 0;
+        font-size: 1.15em;
+        padding: 0;
+    }
+
+    .cv-section-content {
+        margin-left: 22%;
+        padding-left: 2em;
+        padding-top: 0.2em;
+    }
+
+    .cv-entry {
+        margin-bottom: 1.2em;
+        padding-bottom: 1.2em;
+        border-bottom: 1px solid var(--border);
+    }
+    .cv-entry:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .cv-title {
+        font-size: 1.1em;
+        font-weight: 600;
+        line-height: 1.4;
+    }
+
+    .cv-role {
+        overflow: hidden;
+        margin-bottom: 0.15em;
+    }
+
+    .cv-type {
+        color: var(--secondary);
+        font-size: 0.9em;
+    }
+
+    .cv-dates {
+        float: right;
+        font-size: 0.8em;
+        color: var(--secondary);
+        line-height: 2;
+    }
+
+    .cv-description {
+        margin-top: 0.5em;
+        padding: 0.5em 1em;
+        max-width: 30em;
+        background: var(--code-bg);
+        color: var(--secondary);
+        font-size: 0.9em;
+    }
+
+    @media (max-width: 768px) {
+        .cv-section h2 {
+            float: none;
+            width: auto;
+            text-align: left;
+            margin-bottom: 0.5em;
+        }
+        .cv-section-content {
+            margin-left: 0;
+            padding-left: 1em;
+        }
+        .cv-dates {
+            float: none;
+            display: block;
+            line-height: 1.4;
+        }
+        .cv-name {
+            font-size: 2em;
+        }
+    }
+</style>
+
+{{- end }}

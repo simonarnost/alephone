@@ -27,16 +27,8 @@ copyright = '© Simon Arnost'
     imageHeight = 120
 
     [[params.profileMode.buttons]]
-      name = 'Posts'
-      url = '/posts/'
-
-    [[params.profileMode.buttons]]
-      name = 'About'
-      url = '/about/'
-
-    [[params.profileMode.buttons]]
-      name = 'Tags'
-      url = '/tags/'
+      name = 'CV'
+      url = '/cv/'
 
   [[params.socialIcons]]
     name = 'github'
@@ -52,19 +44,14 @@ copyright = '© Simon Arnost'
   weight = 1
 
 [[menu.main]]
-  name = 'Posts'
-  url = '/posts/'
+  name = 'CV'
+  url = '/cv/'
   weight = 2
 
 [[menu.main]]
-  name = 'About'
-  url = '/about/'
+  name = 'Contact'
+  url = '/contact/'
   weight = 3
-
-[[menu.main]]
-  name = 'Tags'
-  url = '/tags/'
-  weight = 4
 
 [taxonomies]
   tag = 'tags'

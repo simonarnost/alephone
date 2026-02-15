@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Hugo static site (personal portfolio/blog) using the **Hugo Noir** theme — a minimalist, dark-mode-first portfolio theme built with Tailwind CSS.
+Hugo static site (personal portfolio) for Simon Arnost using the **PaperMod** theme — a fast, clean, responsive Hugo theme with dark/light mode support.
 
-**Requires:** Hugo Extended (minimum v0.92.0)
+**Requires:** Hugo Extended (minimum v0.146.0)
 
 ## Commands
 
@@ -23,44 +23,49 @@ No npm/build scripts — Hugo CLI is the only build tool needed.
 
 ### Theme Setup
 
-The active theme is `themes/noir/` (a local copy, **not** a git submodule). The git submodules (`themes/hugo-noir`, `themes/papermod`) are registered but `hugo-noir` is not checked out and `papermod` is an alternative theme not in use.
+PaperMod is installed as a git submodule at `themes/papermod/`. Other themes (`themes/noir/`, `themes/ink/`) may exist but are unused.
 
-`hugo.toml` sets `theme = 'noir'`.
+`hugo.toml` sets `theme = 'papermod'`.
 
-### Content Model (Data-Driven)
+### Site Structure
 
-The Hugo Noir theme is primarily **data-driven** rather than content-driven. Homepage sections (author info, tech stack carousel, experience timeline, projects, honors, certifications) pull from **TOML data files**, not markdown content.
+- **Homepage:** Profile mode (centered title, subtitle, buttons, social icons)
+- **CV page:** Custom layout at `layouts/cv/single.html` with right-aligned dates (inspired by thesquareplanet.com)
+- **Contact page:** Simple content page
+- **Footer:** Overridden at `layouts/partials/footer.html` (shows year only)
 
-Expected data structure:
-- `data/<lang>/author.toml` — name, location, bio, social links
-- `data/<lang>/tech.toml` — tech stack with Devicon icon classes (row1/row2 arrays for carousel)
-- `data/<lang>/experience.toml` — professional experience entries
+### Content Pages
 
-Content pages go in `content/<lang>/` (e.g., `content/en/`, `content/es/`). Blog posts go in `content/<lang>/blogs/`.
-
-The full reference configuration with all available params is at `themes/noir/exampleSite/hugo.toml`.
+- `content/cv.md` — CV (uses `type: cv` for custom layout)
+- `content/contact.md` — Contact info
+- `content/about.md` — About page
+- `content/posts/` — Blog posts
 
 ### Theme Customization
 
-Do **not** edit files in `themes/noir/` directly. Instead, override by placing files at the same relative path in the site root:
-- Layout overrides: `layouts/` (mirrors `themes/noir/layouts/`)
-- CSS overrides: `assets/css/custom.css`
-- Static assets: `static/`
+Do **not** edit files in `themes/papermod/` directly. Instead:
+- **Layout overrides:** place files in `layouts/` with same path as theme
+- **Custom CSS:** add files to `assets/css/extended/` (auto-bundled)
+- **Custom head/footer HTML:** create `layouts/partials/extend_head.html` or `extend_footer.html`
+- **Custom page types:** set `type` in front matter, create `layouts/<type>/single.html`
 
-### Key Theme Internals
+### PaperMod CSS Variables
 
-- **Tailwind CSS** via CDN (class-based dark mode with `localStorage` persistence)
-- **Space Grotesk** font (Google Fonts)
-- **Devicons** via CDN for tech stack icons
-- **Multilingual support:** en, es, fr, zh-tw (translation strings in `themes/noir/i18n/`)
-- Homepage (`themes/noir/layouts/index.html`) is a large single-file template (~1300 lines) containing hero, tech carousel, experience, projects, blog highlights, honors, certifications, and voluntary work sections
+Use these in custom layouts to stay consistent with the theme:
+`--primary`, `--secondary`, `--tertiary`, `--content`, `--theme`, `--entry`, `--code-bg`, `--border`, `--gap`
 
 ### Front Matter Format
 
-```toml
-+++
-date = '2025-01-15T10:00:00+00:00'
-draft = true
-title = 'Post Title'
-+++
+```yaml
+---
+title: "Post Title"
+date: 2026-01-15
+draft: true
+tags: ["tag1"]
+hidemeta: true
+---
 ```
+
+### Hugo TOML Notes
+
+- `paginate` is deprecated since Hugo v0.128.0 — use `[pagination] pagerSize = 10`
