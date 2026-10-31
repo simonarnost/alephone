@@ -23,13 +23,7 @@ const single = e.roles.length === 1;
             <span class="leader" aria-hidden="true" />
             <span class="dates">{r.dates}</span>
           </div>
-          {r.points && (
-            <ul class="points">
-              {r.points.map((p) => (
-                <li set:html={inline(p)} />
-              ))}
-            </ul>
-          )}
+          {r.summary && <p class="summary" set:html={inline(r.summary)} />}
         </li>
       ))
     }
@@ -112,25 +106,12 @@ const single = e.roles.length === 1;
     white-space: nowrap;
     font-variant-numeric: tabular-nums;
   }
-  .points {
-    list-style: none;
-    margin: 0.5rem 0 0;
-    padding: 0;
-    display: grid;
-    gap: 0.35rem;
-    font-size: 0.94rem;
+  .summary {
+    margin: 0.35rem 0 0;
+    max-width: 58ch;
+    font-size: 0.95rem;
     line-height: 1.6;
     color: var(--muted);
-  }
-  .points li {
-    position: relative;
-    padding-left: 1rem;
-  }
-  .points li::before {
-    content: '–';
-    position: absolute;
-    left: 0;
-    color: var(--faint);
   }
   @media (max-width: 480px) {
     header {
@@ -143,11 +124,6 @@ const single = e.roles.length === 1;
     }
     .leader {
       display: none;
-    }
-  }
-  @media print {
-    .points {
-      font-size: 0.85rem;
     }
   }
 </style>

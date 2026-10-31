@@ -1,24 +1,18 @@
 ---
 import Base from '../layouts/Base.astro';
 import CvEntry from '../components/CvEntry.astro';
-import ProjectList from '../components/ProjectList.astro';
-import { experience, education, skills, languages } from '../data/cv';
+import { experience, education } from '../data/cv';
 import { SITE, SOCIALS } from '../site';
 ---
 
-<Base title="CV" description="Experience, projects, education and skills of Šimon Arnošt.">
+<Base title="CV" description="Experience and education of Šimon Arnošt.">
   <header class="rise">
     <p class="print-name">{SITE.title}</p>
     <p class="kicker">Curriculum vitae</p>
     <h1 class="page-title">Work &amp; <em>study</em></h1>
     <p class="contact">
       <span>{SITE.location}</span>
-      {
-        SOCIALS.map((s) => (
-          <a href={s.url}>{s.name === 'Email' ? s.handle : s.name}</a>
-        ))
-      }
-      <button type="button" class="print" onclick="window.print()">Save as PDF</button>
+      {SOCIALS.map((s) => <a href={s.url}>{s.name === 'Email' ? s.handle : s.name}</a>)}
     </p>
   </header>
 
@@ -29,45 +23,11 @@ import { SITE, SOCIALS } from '../site';
     </section>
 
     <section>
-      <h2 class="kicker">Projects</h2>
-      <div class="flush"><ProjectList /></div>
-    </section>
-
-    <section>
       <h2 class="kicker">Education</h2>
       <div class="stack">{education.map((e) => <CvEntry entry={e} />)}</div>
     </section>
-
-    <section>
-      <h2 class="kicker">Skills</h2>
-      <dl class="skills">
-        {
-          Object.entries(skills).map(([group, items]) => (
-            <div>
-              <dt>{group}</dt>
-              <dd>
-                {items.map((i) => (
-                  <span class="chip">{i}</span>
-                ))}
-              </dd>
-            </div>
-          ))
-        }
-        <div>
-          <dt>Spoken</dt>
-          <dd>{languages.map((l) => <span class="chip">{l}</span>)}</dd>
-        </div>
-      </dl>
-    </section>
   </div>
 </Base>
-
-<script>
-  if (location.hash === '#print') {
-    history.replaceState(null, '', location.pathname);
-    window.addEventListener('load', () => setTimeout(() => window.print(), 300));
-  }
-</script>
 
 <style>
   .page-title {
@@ -79,28 +39,10 @@ import { SITE, SOCIALS } from '../site';
   .contact {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     gap: 0.4rem 1.1rem;
     margin: 0 0 3rem;
     font-size: 0.9rem;
     color: var(--muted);
-  }
-  .print {
-    margin-left: auto;
-    font: 500 0.72rem/1 var(--mono);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 0.55rem 0.85rem;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    background: transparent;
-    color: var(--ink);
-    cursor: pointer;
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .print:hover {
-    border-color: var(--accent);
-    color: var(--accent);
   }
 
   .cv section {
@@ -120,41 +62,6 @@ import { SITE, SOCIALS } from '../site';
     display: grid;
     gap: 2.75rem;
   }
-  .flush :global(.project:first-child) {
-    padding-top: 0.3rem;
-  }
-  .flush :global(li:last-child .project) {
-    border-bottom: 0;
-  }
-
-  .skills {
-    margin: 0.3rem 0 0;
-    display: grid;
-    gap: 0.9rem;
-  }
-  .skills > div {
-    display: grid;
-    grid-template-columns: 7.5rem 1fr;
-    gap: 0.75rem;
-    align-items: baseline;
-  }
-  dt {
-    font-size: 0.85rem;
-    font-weight: 500;
-  }
-  dd {
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
-  }
-  .chip {
-    font-size: 0.8rem;
-    padding: 0.15rem 0.55rem;
-    border-radius: 6px;
-    background: var(--surface);
-    color: var(--muted);
-  }
 
   @media (max-width: 640px) {
     .cv section {
@@ -164,18 +71,8 @@ import { SITE, SOCIALS } from '../site';
     .cv section > .kicker {
       position: static;
     }
-    .skills > div {
-      grid-template-columns: 1fr;
-      gap: 0.35rem;
-    }
-    .print {
-      margin-left: 0;
-    }
   }
   @media print {
-    .print {
-      display: none;
-    }
     .print-name {
       display: block;
       font: 400 2.25rem/1 var(--serif);
@@ -187,13 +84,8 @@ import { SITE, SOCIALS } from '../site';
     .cv section {
       padding-block: 1.25rem;
     }
-    .cv :global(.roles > li),
-    .cv :global(.project) {
+    .cv :global(.roles > li) {
       break-inside: avoid;
-    }
-    .chip {
-      background: none;
-      padding: 0;
     }
   }
 </style>
