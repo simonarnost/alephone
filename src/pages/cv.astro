@@ -1,51 +1,104 @@
 ---
 import Base from '../layouts/Base.astro';
-import { experience, education, type Entry } from '../data/cv';
-
-const sections: { label: string; entries: Entry[] }[] = [
-  { label: 'Experience', entries: experience },
-  { label: 'Education', entries: education },
-];
+import CvEntry from '../components/CvEntry.astro';
+import ProjectList from '../components/ProjectList.astro';
+import { experience, education, skills, languages } from '../data/cv';
+import { SITE, SOCIALS } from '../site';
 ---
 
-<Base title="CV" description="Experience and education of Simon Arnost.">
+<Base title="CV" description="Experience, projects, education and skills of Šimon Arnošt.">
   <header class="rise">
+    <p class="print-name">{SITE.title}</p>
     <p class="kicker">Curriculum vitae</p>
     <h1 class="page-title">Work &amp; <em>study</em></h1>
+    <p class="contact">
+      <span>{SITE.location}</span>
+      {
+        SOCIALS.map((s) => (
+          <a href={s.url}>{s.name === 'Email' ? s.handle : s.name}</a>
+        ))
+      }
+      <button type="button" class="print" onclick="window.print()">Save as PDF</button>
+    </p>
   </header>
 
   <div class="cv rise">
-    {
-      sections.map(({ label, entries }) => (
-        <section>
-          <h2 class="kicker">{label}</h2>
-          <div class="entries">
-            {entries.map((e) => (
-              <article class="entry">
-                <h3>{e.url ? <a href={e.url}>{e.org}</a> : e.org}</h3>
-                {e.summary && <p class="summary">{e.summary}</p>}
-                <ol class="roles">
-                  {e.roles.map((r) => (
-                    <li class:list={{ current: r.current }}>
-                      <span class="role">{r.title}</span>
-                      <span class="leader" aria-hidden="true" />
-                      <span class="dates">{r.dates}</span>
-                    </li>
-                  ))}
-                </ol>
-              </article>
-            ))}
-          </div>
-        </section>
-      ))
-    }
+    <section>
+      <h2 class="kicker">Experience</h2>
+      <div class="stack">{experience.map((e) => <CvEntry entry={e} />)}</div>
+    </section>
+
+    <section>
+      <h2 class="kicker">Projects</h2>
+      <div class="flush"><ProjectList /></div>
+    </section>
+
+    <section>
+      <h2 class="kicker">Education</h2>
+      <div class="stack">{education.map((e) => <CvEntry entry={e} />)}</div>
+    </section>
+
+    <section>
+      <h2 class="kicker">Skills</h2>
+      <dl class="skills">
+        {
+          Object.entries(skills).map(([group, items]) => (
+            <div>
+              <dt>{group}</dt>
+              <dd>
+                {items.map((i) => (
+                  <span class="chip">{i}</span>
+                ))}
+              </dd>
+            </div>
+          ))
+        }
+        <div>
+          <dt>Spoken</dt>
+          <dd>{languages.map((l) => <span class="chip">{l}</span>)}</dd>
+        </div>
+      </dl>
+    </section>
   </div>
 </Base>
 
 <style>
+  .page-title {
+    margin-bottom: 1rem;
+  }
+  .print-name {
+    display: none;
+  }
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 1.1rem;
+    margin: 0 0 3rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .print {
+    margin-left: auto;
+    font: 500 0.72rem/1 var(--mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.55rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .print:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
   .cv section {
     display: grid;
-    grid-template-columns: 8.5rem 1fr;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
     gap: 1.5rem;
     padding-block: 2rem;
     border-top: 1px solid var(--line);
@@ -56,88 +109,84 @@ const sections: { label: string; entries: Entry[] }[] = [
     top: 1.5rem;
     align-self: start;
   }
-  .entries {
-    min-width: 0;
+  .stack {
     display: grid;
-    gap: 2.5rem;
+    gap: 2.75rem;
   }
-  h3 {
-    font-size: 1.45rem;
-    margin: 0 0 0.6rem;
-    font-variation-settings: 'SOFT' 100, 'opsz' 48;
+  .flush :global(.project:first-child) {
+    padding-top: 0.3rem;
   }
-  h3 a {
-    text-decoration: none;
+  .flush :global(li:last-child .project) {
+    border-bottom: 0;
   }
-  .summary {
-    margin: 0 0 1rem;
-    color: var(--muted);
-    max-width: 52ch;
-  }
-  .roles {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+
+  .skills {
+    margin: 0.3rem 0 0;
     display: grid;
-    gap: 0.35rem;
+    gap: 0.9rem;
   }
-  .roles li {
-    display: flex;
-    align-items: baseline;
+  .skills > div {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr;
     gap: 0.75rem;
-    font-size: 0.95rem;
+    align-items: baseline;
   }
-  .roles li:not(.current) .role {
-    color: var(--muted);
-  }
-  .current .role {
+  dt {
+    font-size: 0.85rem;
     font-weight: 500;
   }
-  .current .role::before {
-    content: '';
-    display: inline-block;
-    width: 0.45rem;
-    height: 0.45rem;
-    margin-right: 0.55rem;
-    border-radius: 50%;
-    background: var(--accent);
-    vertical-align: 0.1em;
-    box-shadow: 0 0 0 0 var(--accent);
-    animation: pulse 2.4s infinite;
+  dd {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
   }
-  @keyframes pulse {
-    70% {
-      box-shadow: 0 0 0 6px transparent;
-    }
-    100% {
-      box-shadow: 0 0 0 0 transparent;
-    }
-  }
-  .leader {
-    flex: 1;
-    min-width: 1rem;
-    border-bottom: 1px dotted var(--line);
-    translate: 0 -0.3em;
-  }
-  .dates {
-    font: 0.8rem var(--mono);
-    color: var(--faint);
-    white-space: nowrap;
-    font-variant-numeric: tabular-nums;
+  .chip {
+    font-size: 0.8rem;
+    padding: 0.15rem 0.55rem;
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--muted);
   }
 
   @media (max-width: 640px) {
     .cv section {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 1rem;
     }
     .cv section > .kicker {
       position: static;
     }
+    .skills > div {
+      grid-template-columns: 1fr;
+      gap: 0.35rem;
+    }
+    .print {
+      margin-left: 0;
+    }
   }
-  @media (prefers-reduced-motion: reduce) {
-    .current .role::before {
-      animation: none;
+  @media print {
+    .print {
+      display: none;
+    }
+    .print-name {
+      display: block;
+      font: 400 2.25rem/1 var(--serif);
+      margin: 0 0 0.5rem;
+    }
+    .page-title {
+      display: none;
+    }
+    .cv section {
+      padding-block: 1.25rem;
+    }
+    .cv :global(.roles > li),
+    .cv :global(.project) {
+      break-inside: avoid;
+    }
+    .chip {
+      background: none;
+      padding: 0;
     }
   }
 </style>

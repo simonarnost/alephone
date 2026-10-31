@@ -1,0 +1,79 @@
+---
+import { projects } from '../data/cv';
+---
+
+<ul class="projects">
+  {
+    projects.map((p) => {
+      const Tag = p.url ? 'a' : 'div';
+      return (
+        <li>
+          <Tag class="project" href={p.url} target={p.url ? '_blank' : undefined} rel={p.url ? 'noopener' : undefined}>
+            <span class="head">
+              <span class="name">{p.name}</span>
+              <span class="lang">{p.lang}</span>
+              {p.status && <span class="status">{p.status}</span>}
+              {p.url && <span class="arrow" aria-hidden="true">↗</span>}
+            </span>
+            <span class="blurb">{p.blurb}</span>
+          </Tag>
+        </li>
+      );
+    })
+  }
+</ul>
+
+<style>
+  .projects {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .project {
+    display: grid;
+    gap: 0.25rem;
+    padding-block: 0.9rem;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+  }
+  .head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  .name {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-variation-settings: 'SOFT' 100;
+  }
+  .lang,
+  .status {
+    font: 0.68rem/1 var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.25rem 0.45rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--faint);
+  }
+  .status {
+    border-color: color-mix(in oklch, var(--accent) 50%, transparent);
+    color: var(--accent);
+  }
+  .arrow {
+    margin-left: auto;
+    color: var(--faint);
+    transition: transform 0.3s var(--ease), color 0.2s;
+  }
+  .blurb {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  a.project:hover .name,
+  a.project:hover .arrow {
+    color: var(--accent);
+  }
+  a.project:hover .arrow {
+    transform: translate(3px, -3px);
+  }
+</style>

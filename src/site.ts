@@ -1,8 +1,6 @@
 export const SITE = {
-  title: 'Simon Arnost',
-  description: 'Software engineer in Prague. Personal site and writing.',
-  role: 'Software Engineer',
-  company: { name: 'Make', url: 'https://www.make.com' },
+  title: 'Šimon Arnošt',
+  description: 'Software engineer in Prague. Backend services, databases, and lately Rust and storage engines.',
   location: 'Prague, Czech Republic',
   email: 'arnost.simon@gmail.com',
 };

@@ -1,0 +1,153 @@
+---
+import { inline, type Entry } from '../data/cv';
+
+interface Props {
+  entry: Entry;
+}
+const { entry: e } = Astro.props;
+const single = e.roles.length === 1;
+---
+
+<article class="entry">
+  <header>
+    <h3>{e.url ? <a href={e.url}>{e.org}</a> : e.org}</h3>
+    {e.dates && !single && <span class="span">{e.dates}</span>}
+  </header>
+  {e.tagline && <p class="tagline">{e.tagline}</p>}
+  <ol class="roles" class:list={{ track: !single }}>
+    {
+      e.roles.map((r) => (
+        <li>
+          <div class="role-head">
+            <span class="role">{r.title}</span>
+            <span class="leader" aria-hidden="true" />
+            <span class="dates">{r.dates}</span>
+          </div>
+          {r.points && (
+            <ul class="points">
+              {r.points.map((p) => (
+                <li set:html={inline(p)} />
+              ))}
+            </ul>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</article>
+
+<style>
+  header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+    margin: 0;
+    font-variation-settings: 'SOFT' 100, 'opsz' 48;
+  }
+  h3 a {
+    text-decoration: none;
+  }
+  .span {
+    font: 0.75rem var(--mono);
+    color: var(--faint);
+    white-space: nowrap;
+  }
+  .tagline {
+    margin: 0.15rem 0 0;
+    color: var(--faint);
+    font-size: 0.9rem;
+  }
+  .roles {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 1.25rem;
+  }
+  /* vertical timeline for multi-role entries */
+  .track {
+    border-left: 1px solid var(--line);
+    padding-left: 1.25rem;
+    margin-left: 0.2rem;
+  }
+  .track > li {
+    position: relative;
+  }
+  .track > li::before {
+    content: '';
+    position: absolute;
+    left: calc(-1.25rem - 4px);
+    top: 0.55em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--faint);
+  }
+  .track > li:first-child::before {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .role-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+  .role {
+    font-weight: 500;
+  }
+  .leader {
+    flex: 1;
+    min-width: 1rem;
+    border-bottom: 1px dotted var(--line);
+    translate: 0 -0.3em;
+  }
+  .dates {
+    font: 0.78rem var(--mono);
+    color: var(--faint);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .points {
+    list-style: none;
+    margin: 0.5rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0.35rem;
+    font-size: 0.94rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  .points li {
+    position: relative;
+    padding-left: 1rem;
+  }
+  .points li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--faint);
+  }
+  @media (max-width: 480px) {
+    header {
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+    .role-head {
+      flex-wrap: wrap;
+      gap: 0 0.75rem;
+    }
+    .leader {
+      display: none;
+    }
+  }
+  @media print {
+    .points {
+      font-size: 0.85rem;
+    }
+  }
+</style>

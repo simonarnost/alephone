@@ -3,8 +3,10 @@ import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
+import ProjectList from '../components/ProjectList.astro';
+import { now, inline } from '../data/cv';
 import portrait from '../assets/portrait.jpeg';
-import { SITE, SOCIALS } from '../site';
+import { SITE, SOCIALS, url } from '../site';
 
 const posts = (await getCollection('posts', ({ data }) => import.meta.env.DEV || !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -14,29 +16,40 @@ const posts = (await getCollection('posts', ({ data }) => import.meta.env.DEV ||
 <Base>
   <section class="hero rise">
     <p class="kicker">ℵ₁ — {SITE.location}</p>
-    <h1 class="page-title">Simon <em>Arnost</em></h1>
+    <h1 class="page-title">Šimon <em>Arnošt</em></h1>
     <p class="lede">
-      {SITE.role} at <a href={SITE.company.url}>{SITE.company.name}</a>. I build software that
-      helps people automate the boring parts of their work.
+      I'm a software engineer in Prague. I work mostly on backend services and databases. Lately
+      I'm learning Rust and reading about storage engines.
     </p>
   </section>
 
   <section class="about rise">
     <figure class="portrait">
-      <Image src={portrait} alt="Portrait of Simon Arnost" widths={[240, 480]} sizes="240px" loading="eager" />
+      <Image src={portrait} alt="Portrait of Šimon Arnošt" widths={[240, 480]} sizes="240px" loading="eager" />
     </figure>
     <div class="bio">
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat.
+        I spent five years at <a href="https://www.make.com">Make</a>, a workflow automation
+        platform. I started in QA and ended up owning production TypeScript and Node.js services on
+        AWS and Kubernetes.
       </p>
       <p>
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
+        Most of that work was backend services, PostgreSQL, and event-driven systems. More in my <a
+          href={url('cv/')}>CV</a>.
       </p>
     </div>
+  </section>
+
+  <section class="block rise">
+    <h2 class="kicker">Now</h2>
+    <ul class="now">
+      {now.map((n) => <li set:html={inline(n)} />)}
+    </ul>
+  </section>
+
+  <section class="block rise">
+    <h2 class="kicker">Projects</h2>
+    <ProjectList />
   </section>
 
   {
@@ -129,6 +142,25 @@ const posts = (await getCollection('posts', ({ data }) => import.meta.env.DEV ||
     margin: 0 0 1rem;
     padding-bottom: 0.75rem;
     border-bottom: 1px solid var(--line);
+  }
+
+  .now {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+  }
+  .now li {
+    position: relative;
+    padding-left: 1.5rem;
+    color: var(--muted);
+  }
+  .now li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
   }
 
   .links {

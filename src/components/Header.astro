@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import ThemeToggle from './ThemeToggle.astro';
-import { url } from '../site';
+import { SITE, url } from '../site';
 
 const posts = await getCollection('posts', ({ data }) => import.meta.env.DEV || !data.draft);
 const nav = [
@@ -14,7 +14,7 @@ const path = Astro.url.pathname.replace(/\/?$/, '/');
 <header class="site-header wrap">
   <a class="mark" href={url()} aria-label="Home">
     <span class="glyph" aria-hidden="true">ℵ<sub>1</sub></span>
-    <span class="name">Simon Arnost</span>
+    <span class="name">{SITE.title}</span>
   </a>
   <nav aria-label="Main">
     {
