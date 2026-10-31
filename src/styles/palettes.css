@@ -1,0 +1,305 @@
+/*
+ * Color palettes for the default design, switched via <html data-palette="…">.
+ * Preview with ?palette=<name> (persists in localStorage). "ember" = :root defaults.
+ * Each palette defines light + dark tokens.
+ */
+
+/* ---- forest: sage paper, deep green accent ---- */
+:root[data-palette='forest'] {
+  --bg: oklch(97% 0.012 130);
+  --surface: oklch(93.5% 0.016 130);
+  --ink: oklch(23% 0.02 150);
+  --muted: oklch(45% 0.02 150);
+  --faint: oklch(60% 0.015 140);
+  --line: oklch(87% 0.016 130);
+  --accent: oklch(50% 0.11 155);
+}
+:root[data-palette='forest'][data-theme='dark'] {
+  --bg: oklch(17% 0.012 160);
+  --surface: oklch(22% 0.014 160);
+  --ink: oklch(92% 0.015 120);
+  --muted: oklch(73% 0.015 130);
+  --faint: oklch(56% 0.015 140);
+  --line: oklch(30% 0.014 160);
+  --accent: oklch(78% 0.12 150);
+}
+
+/* ---- cobalt: cool white, ink-blue accent ---- */
+:root[data-palette='cobalt'] {
+  --bg: oklch(98% 0.004 250);
+  --surface: oklch(95% 0.008 250);
+  --ink: oklch(22% 0.02 260);
+  --muted: oklch(46% 0.02 260);
+  --faint: oklch(62% 0.015 260);
+  --line: oklch(89% 0.01 255);
+  --accent: oklch(50% 0.2 262);
+}
+:root[data-palette='cobalt'][data-theme='dark'] {
+  --bg: oklch(16% 0.015 265);
+  --surface: oklch(21% 0.02 265);
+  --ink: oklch(93% 0.01 250);
+  --muted: oklch(74% 0.015 255);
+  --faint: oklch(56% 0.02 260);
+  --line: oklch(29% 0.02 265);
+  --accent: oklch(74% 0.14 255);
+}
+
+/* ---- plum: lavender-grey paper, plum accent ---- */
+:root[data-palette='plum'] {
+  --bg: oklch(97.5% 0.008 320);
+  --surface: oklch(94% 0.012 320);
+  --ink: oklch(22% 0.02 320);
+  --muted: oklch(46% 0.02 320);
+  --faint: oklch(62% 0.015 320);
+  --line: oklch(88% 0.012 320);
+  --accent: oklch(50% 0.17 345);
+}
+:root[data-palette='plum'][data-theme='dark'] {
+  --bg: oklch(16.5% 0.014 320);
+  --surface: oklch(21.5% 0.018 320);
+  --ink: oklch(93% 0.012 320);
+  --muted: oklch(74% 0.015 320);
+  --faint: oklch(56% 0.018 320);
+  --line: oklch(29% 0.018 320);
+  --accent: oklch(76% 0.13 345);
+}
+
+/* ---- ochre: sand paper, mustard accent, brown ink ---- */
+:root[data-palette='ochre'] {
+  --bg: oklch(96.5% 0.018 85);
+  --surface: oklch(92.5% 0.025 85);
+  --ink: oklch(25% 0.03 60);
+  --muted: oklch(45% 0.03 60);
+  --faint: oklch(60% 0.03 70);
+  --line: oklch(86% 0.025 80);
+  --accent: oklch(60% 0.13 75);
+}
+:root[data-palette='ochre'][data-theme='dark'] {
+  --bg: oklch(18% 0.015 60);
+  --surface: oklch(23% 0.02 60);
+  --ink: oklch(92% 0.025 85);
+  --muted: oklch(74% 0.025 80);
+  --faint: oklch(57% 0.025 70);
+  --line: oklch(31% 0.02 60);
+  --accent: oklch(80% 0.14 80);
+}
+
+/* ---- mono: greyscale, no hue ---- */
+:root[data-palette='mono'] {
+  --bg: oklch(98% 0 0);
+  --surface: oklch(94.5% 0 0);
+  --ink: oklch(18% 0 0);
+  --muted: oklch(45% 0 0);
+  --faint: oklch(62% 0 0);
+  --line: oklch(88% 0 0);
+  --accent: oklch(18% 0 0);
+}
+:root[data-palette='mono'][data-theme='dark'] {
+  --bg: oklch(14% 0 0);
+  --surface: oklch(19% 0 0);
+  --ink: oklch(94% 0 0);
+  --muted: oklch(72% 0 0);
+  --faint: oklch(54% 0 0);
+  --line: oklch(28% 0 0);
+  --accent: oklch(94% 0 0);
+}
+
+/* ---- teal: neutral cool paper, petrol accent ---- */
+:root[data-palette='teal'] {
+  --bg: oklch(97.6% 0.005 200);
+  --surface: oklch(94% 0.009 200);
+  --ink: oklch(22% 0.02 220);
+  --muted: oklch(45% 0.02 215);
+  --faint: oklch(61% 0.015 210);
+  --line: oklch(88% 0.01 205);
+  --accent: oklch(50% 0.09 200);
+}
+:root[data-palette='teal'][data-theme='dark'] {
+  --bg: oklch(16.5% 0.012 215);
+  --surface: oklch(21.5% 0.016 215);
+  --ink: oklch(93% 0.01 200);
+  --muted: oklch(74% 0.014 205);
+  --faint: oklch(56% 0.016 210);
+  --line: oklch(29% 0.016 215);
+  --accent: oklch(79% 0.1 192);
+}
+
+/* ---- oxblood: rose-grey paper, deep wine accent ---- */
+:root[data-palette='oxblood'] {
+  --bg: oklch(97.6% 0.005 20);
+  --surface: oklch(94.3% 0.008 20);
+  --ink: oklch(21% 0.015 15);
+  --muted: oklch(45% 0.015 15);
+  --faint: oklch(61% 0.012 15);
+  --line: oklch(88% 0.01 15);
+  --accent: oklch(42% 0.13 18);
+}
+:root[data-palette='oxblood'][data-theme='dark'] {
+  --bg: oklch(16% 0.008 15);
+  --surface: oklch(21% 0.011 15);
+  --ink: oklch(93% 0.008 20);
+  --muted: oklch(73% 0.01 20);
+  --faint: oklch(55% 0.012 15);
+  --line: oklch(29% 0.012 15);
+  --accent: oklch(72% 0.12 12);
+}
+
+/* ---- olive: pale khaki paper, olive accent ---- */
+:root[data-palette='olive'] {
+  --bg: oklch(97% 0.012 105);
+  --surface: oklch(93.5% 0.018 105);
+  --ink: oklch(23% 0.02 110);
+  --muted: oklch(45% 0.02 110);
+  --faint: oklch(60% 0.02 110);
+  --line: oklch(87% 0.018 105);
+  --accent: oklch(50% 0.1 118);
+}
+:root[data-palette='olive'][data-theme='dark'] {
+  --bg: oklch(17% 0.01 110);
+  --surface: oklch(22% 0.013 110);
+  --ink: oklch(92% 0.02 105);
+  --muted: oklch(73% 0.02 105);
+  --faint: oklch(56% 0.02 110);
+  --line: oklch(30% 0.014 110);
+  --accent: oklch(81% 0.12 115);
+}
+
+/* ---- indigo: cool white, violet-blue accent ---- */
+:root[data-palette='indigo'] {
+  --bg: oklch(98% 0.005 280);
+  --surface: oklch(95% 0.01 280);
+  --ink: oklch(21% 0.025 280);
+  --muted: oklch(46% 0.025 280);
+  --faint: oklch(62% 0.02 280);
+  --line: oklch(89% 0.012 280);
+  --accent: oklch(48% 0.2 282);
+}
+:root[data-palette='indigo'][data-theme='dark'] {
+  --bg: oklch(16% 0.02 282);
+  --surface: oklch(21% 0.025 282);
+  --ink: oklch(93% 0.012 280);
+  --muted: oklch(74% 0.02 280);
+  --faint: oklch(56% 0.025 282);
+  --line: oklch(29% 0.025 282);
+  --accent: oklch(76% 0.13 288);
+}
+
+/* ---- lime: neutral grey, acid-green accent (best in dark) ---- */
+:root[data-palette='lime'] {
+  --bg: oklch(97.5% 0 0);
+  --surface: oklch(94% 0.003 130);
+  --ink: oklch(17% 0.005 130);
+  --muted: oklch(44% 0.005 130);
+  --faint: oklch(61% 0.005 130);
+  --line: oklch(88% 0.004 130);
+  --accent: oklch(55% 0.16 135);
+}
+:root[data-palette='lime'][data-theme='dark'] {
+  --bg: oklch(14.5% 0.004 130);
+  --surface: oklch(19.5% 0.006 130);
+  --ink: oklch(94% 0.005 130);
+  --muted: oklch(72% 0.006 130);
+  --faint: oklch(54% 0.006 130);
+  --line: oklch(28% 0.006 130);
+  --accent: oklch(90% 0.2 125);
+}
+
+/* ---- navy: off-white, navy accent; dark = deep navy background ---- */
+:root[data-palette='navy'] {
+  --bg: oklch(97.8% 0.004 250);
+  --surface: oklch(94.5% 0.009 250);
+  --ink: oklch(21% 0.025 255);
+  --muted: oklch(45% 0.025 255);
+  --faint: oklch(61% 0.02 255);
+  --line: oklch(88.5% 0.01 250);
+  --accent: oklch(36% 0.11 258);
+}
+:root[data-palette='navy'][data-theme='dark'] {
+  --bg: oklch(19% 0.04 258);
+  --surface: oklch(24% 0.045 258);
+  --ink: oklch(94% 0.01 250);
+  --muted: oklch(76% 0.025 252);
+  --faint: oklch(60% 0.035 255);
+  --line: oklch(31% 0.045 258);
+  --accent: oklch(80% 0.09 245);
+}
+
+/* ---- midnight: navy as the text colour, cream paper; dark = midnight blue ---- */
+:root[data-palette='midnight'] {
+  --bg: oklch(97.5% 0.008 90);
+  --surface: oklch(94% 0.012 90);
+  --ink: oklch(26% 0.07 260);
+  --muted: oklch(42% 0.05 260);
+  --faint: oklch(58% 0.03 260);
+  --line: oklch(87% 0.015 250);
+  --accent: oklch(26% 0.07 260);
+}
+:root[data-palette='midnight'][data-theme='dark'] {
+  --bg: oklch(16% 0.035 262);
+  --surface: oklch(21% 0.04 262);
+  --ink: oklch(94% 0.012 90);
+  --muted: oklch(77% 0.02 250);
+  --faint: oklch(58% 0.03 258);
+  --line: oklch(28% 0.04 262);
+  --accent: oklch(86% 0.05 90);
+}
+
+/* ---- pine: off-white, dark pine green accent ---- */
+:root[data-palette='pine'] {
+  --bg: oklch(97.6% 0.006 150);
+  --surface: oklch(94.2% 0.01 150);
+  --ink: oklch(21% 0.02 160);
+  --muted: oklch(44% 0.02 160);
+  --faint: oklch(60% 0.015 160);
+  --line: oklch(88% 0.01 150);
+  --accent: oklch(39% 0.08 162);
+}
+:root[data-palette='pine'][data-theme='dark'] {
+  --bg: oklch(17% 0.02 165);
+  --surface: oklch(22% 0.025 165);
+  --ink: oklch(93% 0.012 150);
+  --muted: oklch(75% 0.02 155);
+  --faint: oklch(57% 0.025 160);
+  --line: oklch(29% 0.025 165);
+  --accent: oklch(78% 0.1 158);
+}
+
+/* ---- bottle: green-tinted paper, deep bottle green as text + accent ---- */
+:root[data-palette='bottle'] {
+  --bg: oklch(96.8% 0.012 140);
+  --surface: oklch(93% 0.018 140);
+  --ink: oklch(27% 0.05 160);
+  --muted: oklch(41% 0.04 160);
+  --faint: oklch(57% 0.03 155);
+  --line: oklch(86% 0.02 145);
+  --accent: oklch(27% 0.05 160);
+}
+:root[data-palette='bottle'][data-theme='dark'] {
+  --bg: oklch(20% 0.035 165);
+  --surface: oklch(25% 0.04 165);
+  --ink: oklch(94% 0.015 120);
+  --muted: oklch(78% 0.025 140);
+  --faint: oklch(60% 0.035 155);
+  --line: oklch(32% 0.04 165);
+  --accent: oklch(88% 0.06 120);
+}
+
+/* ---- harbor: navy text, dark green accent ---- */
+:root[data-palette='harbor'] {
+  --bg: oklch(97.8% 0.004 220);
+  --surface: oklch(94.5% 0.008 220);
+  --ink: oklch(23% 0.06 260);
+  --muted: oklch(42% 0.04 255);
+  --faint: oklch(59% 0.025 240);
+  --line: oklch(88% 0.01 220);
+  --accent: oklch(42% 0.09 160);
+}
+:root[data-palette='harbor'][data-theme='dark'] {
+  --bg: oklch(18% 0.035 258);
+  --surface: oklch(23% 0.04 258);
+  --ink: oklch(94% 0.01 240);
+  --muted: oklch(76% 0.02 245);
+  --faint: oklch(59% 0.03 250);
+  --line: oklch(30% 0.04 258);
+  --accent: oklch(78% 0.11 160);
+}

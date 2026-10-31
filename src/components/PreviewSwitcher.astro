@@ -1,0 +1,133 @@
+---
+// Dev-only floating switcher for comparing palettes and display fonts. Remove once chosen.
+const groups = [
+  {
+    key: 'palette',
+    fallback: 'ember',
+    items: [
+      { name: 'ember', swatch: 'oklch(58% 0.19 36)' },
+      { name: 'forest', swatch: 'oklch(50% 0.11 155)' },
+      { name: 'cobalt', swatch: 'oklch(50% 0.2 262)' },
+      { name: 'plum', swatch: 'oklch(50% 0.17 345)' },
+      { name: 'ochre', swatch: 'oklch(60% 0.13 75)' },
+      { name: 'mono', swatch: 'oklch(30% 0 0)' },
+      { name: 'teal', swatch: 'oklch(50% 0.09 200)' },
+      { name: 'oxblood', swatch: 'oklch(42% 0.13 18)' },
+      { name: 'olive', swatch: 'oklch(50% 0.1 118)' },
+      { name: 'indigo', swatch: 'oklch(48% 0.2 282)' },
+      { name: 'lime', swatch: 'oklch(90% 0.2 125)' },
+      { name: 'navy', swatch: 'oklch(36% 0.11 258)' },
+      { name: 'midnight', swatch: 'oklch(26% 0.07 260)' },
+      { name: 'pine', swatch: 'oklch(39% 0.08 162)' },
+      { name: 'bottle', swatch: 'oklch(27% 0.05 160)' },
+      { name: 'harbor', swatch: 'linear-gradient(90deg, oklch(23% 0.06 260) 50%, oklch(42% 0.09 160) 50%)' },
+    ],
+  },
+  {
+    key: 'portrait',
+    fallback: 'photo',
+    items: ['photo', 'sketch', 'dither', 'ascii', 'cat', 'monogram'].map((name) => ({ name, swatch: undefined })),
+  },
+  {
+    key: 'body',
+    fallback: 'inter',
+    items: ['inter', 'geist', 'plex', 'dm', 'figtree', 'manrope', 'literata', 'sourceserif'].map((name) => ({
+      name,
+      swatch: undefined,
+    })),
+  },
+  {
+    key: 'font',
+    fallback: 'fraunces',
+    items: ['fraunces', 'instrument', 'newsreader', 'playfair', 'garamond', 'bricolage', 'space', 'geist'].map(
+      (name) => ({ name, swatch: undefined }),
+    ),
+  },
+];
+---
+
+<div class="switcher" aria-label="Design preview">
+  {
+    groups.map((g) => (
+      <div class="row" role="group" aria-label={g.key} data-key={g.key} data-fallback={g.fallback}>
+        {g.items.map((i) => (
+          <button type="button" data-v={i.name}>
+            {i.swatch && <span class="dot" style={`background:${i.swatch}`} />}
+            {i.name}
+          </button>
+        ))}
+      </div>
+    ))
+  }
+</div>
+
+<script>
+  const root = document.documentElement;
+  document.querySelectorAll<HTMLElement>('.switcher .row').forEach((row) => {
+    const key = row.dataset.key!;
+    const fallback = row.dataset.fallback!;
+    const buttons = row.querySelectorAll<HTMLButtonElement>('button');
+    const sync = () =>
+      buttons.forEach((b) =>
+        b.setAttribute('aria-pressed', String((root.dataset[key] ?? fallback) === b.dataset.v)),
+      );
+    buttons.forEach((b) =>
+      b.addEventListener('click', () => {
+        const v = b.dataset.v!;
+        if (v === fallback) delete root.dataset[key];
+        else root.dataset[key] = v;
+        try {
+          localStorage.setItem(key, v);
+        } catch {}
+        sync();
+      }),
+    );
+    sync();
+  });
+</script>
+
+<style>
+  .switcher {
+    position: fixed;
+    left: 50%;
+    bottom: 1rem;
+    translate: -50% 0;
+    z-index: 200;
+    display: grid;
+    gap: 3px;
+    padding: 4px;
+    border-radius: 16px;
+    background: #111;
+    box-shadow: 0 6px 24px rgb(0 0 0 / 0.25);
+    font: 500 12px/1 system-ui, sans-serif;
+    max-width: calc(100vw - 2rem);
+  }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+  button {
+    all: unset;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    color: #aaa;
+  }
+  button:hover {
+    color: #fff;
+  }
+  button[aria-pressed='true'] {
+    background: #fff;
+    color: #111;
+  }
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 0.3);
+  }
+</style>

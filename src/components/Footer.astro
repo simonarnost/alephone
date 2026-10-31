@@ -33,7 +33,9 @@ const year = new Date().getFullYear();
     justify-content: space-between;
     gap: 1rem;
     padding-block: 2rem 2.5rem;
-    border-top: 1px solid var(--line);
+    /* rule aligned with the content column, not the gutters */
+    background: linear-gradient(var(--line), var(--line)) center top / calc(100% - 2 * var(--gutter)) 1px
+      no-repeat;
     font: 0.75rem/1 var(--mono);
     color: var(--faint);
     letter-spacing: 0.02em;

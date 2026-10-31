@@ -19,7 +19,7 @@ npm run preview  # serve dist/
 - `src/site.ts` — site metadata, socials, `url()` helper. **Always build internal links with `url()`** (site lives under `base: '/alephone'`).
 - `src/data/cv.ts` — CV experience and education (one brief `summary` per role; owner keeps the full CV elsewhere), projects (home), unused `selectedWork` (typed).
 - `src/data/now.ts` — `/now` page items + `updated` date (bump on every change; shown on home and /now).
-- Home (`src/pages/index.astro`): hero + action buttons, bio, Projects, Now teaser. No blog/RSS (owner does not want them). `SelectedWork` component + `selectedWork` data exist but are unused (removed from home on request; may return).
+- Home (`src/pages/index.astro`): hero + action buttons, bio/portrait only. Projects at `/projects`, Now at `/now`. No blog/RSS (owner does not want them). `SelectedWork` component + `selectedWork` data exist but are unused (removed from home on request; may return).
 - `src/layouts/Base.astro` — HTML shell, SEO meta, pre-paint theme script.
 - `src/components/` — Header, Footer (socials, Prague clock), ThemeToggle, ProjectList, CvEntry, SelectedWork.
 - `src/styles/global.css` — design tokens, base, print styles.

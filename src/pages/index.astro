@@ -1,13 +1,8 @@
 ---
-import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import ProjectList from '../components/ProjectList.astro';
-import portrait from '../assets/portrait.jpeg';
-import { inline } from '../data/cv';
-import { now, updated } from '../data/now';
+import Portrait from '../components/Portrait.astro';
 import { SOCIALS, url } from '../site';
 
-const updatedLabel = new Intl.DateTimeFormat('en-GB', { month: 'short', year: 'numeric' }).format(updated);
 const external = SOCIALS.filter((s) => s.name !== 'Email');
 const email = SOCIALS.find((s) => s.name === 'Email')!;
 ---
@@ -16,8 +11,8 @@ const email = SOCIALS.find((s) => s.name === 'Email')!;
   <section class="hero rise">
     <h1 class="page-title">Šimon <em>Arnošt</em></h1>
     <p class="lede">
-      I'm a software engineer in Prague. I work mostly on backend services and databases. Lately
-      I'm learning Rust and reading about storage engines.
+      Software engineer in Prague. I build backend services and spend too much time thinking about
+      databases.
     </p>
     <div class="actions">
       <a class="btn primary" href={email.url}>
@@ -36,40 +31,23 @@ const email = SOCIALS.find((s) => s.name === 'Email')!;
   </section>
 
   <section class="about rise">
-    <figure class="portrait">
-      <Image src={portrait} alt="Portrait of Šimon Arnošt" widths={[240, 480]} sizes="240px" loading="eager" />
-    </figure>
+    <Portrait />
     <div class="bio">
       <p>
-        I spent five years at <a href="https://www.make.com">Make</a>, a workflow automation
-        platform. I started in QA and ended up owning production TypeScript and Node.js services on
-        AWS and Kubernetes.
+        For five years I was at <a href="https://www.make.com">Make</a>. I joined when it was still
+        called Integromat, started in QA breaking things on purpose, and ended up owning production
+        TypeScript and Node.js services on AWS and Kubernetes.
       </p>
       <p>
-        Most of that work was backend services, PostgreSQL, and event-driven systems. More in my <a
-          href={url('cv/')}>CV</a>.
+        Lately I'm learning Rust by building things, mostly a storage engine called mini-lsm. It
+        lives on the <a href={url('projects/')}>projects</a> page with a few other side projects.
+      </p>
+      <p>
+        What I'm reading and working on right now is on the <a href={url('now/')}>now</a> page. The
+        longer version of everything is in my <a href={url('cv/')}>CV</a>.
       </p>
     </div>
   </section>
-
-  <section class="block rise">
-    <div class="block-head">
-      <h2 class="kicker">Projects</h2>
-      <a class="more" href="https://github.com/simonarnost" target="_blank" rel="noopener">GitHub →</a>
-    </div>
-    <ProjectList />
-  </section>
-
-  <section class="block rise">
-    <div class="block-head">
-      <h2 class="kicker">Now <span class="stamp">· {updatedLabel}</span></h2>
-      <a class="more" href={url('now/')}>Now page →</a>
-    </div>
-    <ul class="now">
-      {now.map((n) => <li set:html={inline(n)} />)}
-    </ul>
-  </section>
-
 </Base>
 
 <style>
@@ -83,7 +61,7 @@ const email = SOCIALS.find((s) => s.name === 'Email')!;
   .lede {
     font-size: clamp(1.2rem, 2.6vw, 1.45rem);
     line-height: 1.5;
-    max-width: 34ch;
+    max-width: 40ch;
     margin: 0 0 2rem;
     letter-spacing: -0.01em;
   }
@@ -92,7 +70,7 @@ const email = SOCIALS.find((s) => s.name === 'Email')!;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-bottom: 4rem;
+    margin-bottom: 3.5rem;
   }
   .btn {
     display: inline-flex;
@@ -125,6 +103,7 @@ const email = SOCIALS.find((s) => s.name === 'Email')!;
     color: var(--bg);
   }
   .btn.ghost {
+    padding-inline: 0.6rem;
     border-color: transparent;
     color: var(--muted);
   }
@@ -135,36 +114,12 @@ const email = SOCIALS.find((s) => s.name === 'Email')!;
   .about {
     display: grid;
     grid-template-columns: 11rem 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  :global([data-portrait='cat']) .about {
+    grid-template-columns: 13.5rem 1fr;
     gap: 2rem;
-    align-items: start;
-  }
-  .portrait {
-    margin: 0;
-    position: relative;
-  }
-  .portrait::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 14px;
-    border: 1px solid var(--accent);
-    translate: 8px 8px;
-    z-index: -1;
-    transition: translate 0.4s var(--ease);
-  }
-  .portrait:hover::after {
-    translate: 4px 4px;
-  }
-  .portrait :global(img) {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    border-radius: 14px;
-    filter: grayscale(1) contrast(1.05);
-    transition: filter 0.5s var(--ease);
-  }
-  .portrait:hover :global(img) {
-    filter: none;
   }
   .bio {
     color: var(--muted);
@@ -172,60 +127,22 @@ const email = SOCIALS.find((s) => s.name === 'Email')!;
   .bio p:first-child {
     margin-top: 0;
   }
-
-  .block {
-    margin-top: 4.5rem;
-  }
-  .block-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--line);
-  }
-  .block-head .kicker {
-    margin: 0;
-  }
-  .stamp {
-    color: var(--faint);
-    opacity: 0.8;
-  }
-  .more {
-    font-size: 0.8rem;
-    color: var(--muted);
-    text-decoration: none;
-    white-space: nowrap;
-  }
-  .more:hover {
-    color: var(--accent);
-  }
-
-  .now {
-    list-style: none;
-    margin: 1rem 0 0;
-    padding: 0;
-    display: grid;
-    gap: 0.6rem;
-  }
-  .now li {
-    position: relative;
-    padding-left: 1.5rem;
-    color: var(--muted);
-  }
-  .now li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
+  .bio p:last-child {
+    margin-bottom: 0;
   }
 
   @media (max-width: 560px) {
     .about {
       grid-template-columns: 1fr;
     }
-    .portrait {
+    .about :global(.portrait) {
       max-width: 11rem;
+    }
+    :global([data-portrait='cat']) .about {
+      grid-template-columns: 1fr;
+    }
+    :global([data-portrait='cat']) .about :global(.portrait) {
+      max-width: 13rem;
     }
   }
 </style>

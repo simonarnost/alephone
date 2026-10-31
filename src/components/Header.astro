@@ -1,8 +1,9 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
-import { SITE, url } from '../site';
+import { url } from '../site';
 
 const nav = [
+  { label: 'Projects', href: url('projects/') },
   { label: 'Now', href: url('now/') },
   { label: 'CV', href: url('cv/') },
 ];
@@ -10,9 +11,8 @@ const path = Astro.url.pathname.replace(/\/?$/, '/');
 ---
 
 <header class="site-header wrap">
-  <a class="mark" href={url()} aria-label="Home">
+  <a class="mark" href={url()} aria-label="Home" title="Home">
     <span class="glyph" aria-hidden="true">ℵ<sub>1</sub></span>
-    <span class="name">{SITE.title}</span>
   </a>
   <nav aria-label="Main">
     {
@@ -38,28 +38,28 @@ const path = Astro.url.pathname.replace(/\/?$/, '/');
   .mark {
     display: inline-flex;
     align-items: baseline;
-    gap: 0.6rem;
     text-decoration: none;
+    color: var(--accent);
   }
   .glyph {
-    font: 400 1.75rem/1 var(--serif);
+    display: inline-block;
+    font: 400 2.25rem/1 var(--serif);
     font-variation-settings: 'SOFT' 100, 'WONK' 1;
-    color: var(--accent);
-    transition: transform 0.4s var(--ease);
+    transition: transform 0.4s var(--ease), color 0.2s;
   }
   .glyph sub {
-    font-size: 0.45em;
+    font-size: 0.42em;
     vertical-align: baseline;
     margin-left: 0.05em;
   }
-  .mark:hover .glyph {
-    transform: rotate(-8deg);
+  .mark:hover {
+    color: var(--accent);
   }
-  .name {
-    font-weight: 500;
-    font-size: 0.95rem;
-    letter-spacing: -0.01em;
-    color: var(--ink);
+  .mark:hover .glyph {
+    transform: rotate(-10deg) scale(1.06);
+  }
+  .mark:active .glyph {
+    transform: scale(0.94);
   }
   nav {
     display: flex;
@@ -84,10 +84,5 @@ const path = Astro.url.pathname.replace(/\/?$/, '/');
     height: 2px;
     border-radius: 2px;
     background: var(--accent);
-  }
-  @media (max-width: 420px) {
-    .name {
-      display: none;
-    }
   }
 </style>

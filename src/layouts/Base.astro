@@ -1,5 +1,8 @@
 ---
 import '../styles/global.css';
+import '../styles/palettes.css';
+import '../styles/fonts.css';
+import PreviewSwitcher from '../components/PreviewSwitcher.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE, url } from '../site';
@@ -36,6 +39,17 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         if (t !== 'light' && t !== 'dark')
           t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         document.documentElement.dataset.theme = t;
+        // previews: ?palette= (palettes.css), ?font= / ?body= (fonts.css), ?portrait= (Portrait.astro)
+        const defaults = { palette: 'ember', font: 'fraunces', body: 'inter', portrait: 'photo' };
+        for (const key of Object.keys(defaults)) {
+          let v;
+          try {
+            const q = new URLSearchParams(location.search).get(key);
+            if (q) localStorage.setItem(key, q);
+            v = localStorage.getItem(key);
+          } catch {}
+          if (v && v !== defaults[key]) document.documentElement.dataset[key] = v;
+        }
       })();
     </script>
   </head>
@@ -45,5 +59,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       <slot />
     </main>
     <Footer />
+    {import.meta.env.DEV && <PreviewSwitcher />}
   </body>
 </html>
