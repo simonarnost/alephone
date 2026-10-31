@@ -185,56 +185,6 @@ main {
   }
 }
 
-/* ---------- prose (posts) ---------- */
-.prose {
-  font-size: 1.0625rem;
-}
-.prose h2 {
-  font-size: 1.75rem;
-  margin: 2.5em 0 0.6em;
-}
-.prose h3 {
-  font-size: 1.3rem;
-  margin: 2em 0 0.5em;
-}
-.prose blockquote {
-  margin: 1.5em 0;
-  padding-left: 1.25em;
-  border-left: 2px solid var(--accent);
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 1.15em;
-  color: var(--muted);
-}
-.prose :not(pre) > code {
-  background: var(--surface);
-  padding: 0.15em 0.35em;
-  border-radius: 4px;
-}
-.prose pre {
-  padding: 1.1rem 1.25rem;
-  border-radius: 10px;
-  border: 1px solid var(--line);
-  overflow-x: auto;
-  line-height: 1.55;
-}
-.prose hr {
-  border: 0;
-  text-align: center;
-  margin: 3em 0;
-}
-.prose hr::after {
-  content: '⁂';
-  color: var(--faint);
-}
-
-/* shiki dual theme */
-:root[data-theme='dark'] .astro-code,
-:root[data-theme='dark'] .astro-code span {
-  color: var(--shiki-dark) !important;
-  background-color: var(--shiki-dark-bg) !important;
-}
-
 /* ---------- print ---------- */
 @media print {
   body::before,

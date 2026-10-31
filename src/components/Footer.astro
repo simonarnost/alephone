@@ -1,5 +1,5 @@
 ---
-import { SITE, SOCIALS, url } from '../site';
+import { SITE, SOCIALS } from '../site';
 const year = new Date().getFullYear();
 ---
 
@@ -7,7 +7,6 @@ const year = new Date().getFullYear();
   <span>© {year} {SITE.title}</span>
   <nav class="links" aria-label="Elsewhere">
     {SOCIALS.map((s) => <a href={s.url} rel="me noopener">{s.name}</a>)}
-    <a href={url('rss.xml')}>RSS</a>
   </nav>
   <span class="clock" aria-label="Local time in Prague">
     Prague <time id="prague-time">--:--</time>

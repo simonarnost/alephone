@@ -1,12 +1,9 @@
 ---
-import { getCollection } from 'astro:content';
 import ThemeToggle from './ThemeToggle.astro';
 import { SITE, url } from '../site';
 
-const posts = await getCollection('posts', ({ data }) => import.meta.env.DEV || !data.draft);
 const nav = [
   { label: 'Now', href: url('now/') },
-  ...(posts.length ? [{ label: 'Writing', href: url('writing/') }] : []),
   { label: 'CV', href: url('cv/') },
 ];
 const path = Astro.url.pathname.replace(/\/?$/, '/');
