@@ -2,6 +2,7 @@
 
 export type Role = { title: string; dates: string; points?: string[] };
 export type Entry = { org: string; tagline?: string; url?: string; dates?: string; roles: Role[] };
+export type Work = { title: string; context: string; text: string; tags: string[] };
 export type Project = { name: string; lang: string; blurb: string; url?: string; status?: string };
 
 export const experience: Entry[] = [
@@ -100,6 +101,40 @@ export const projects: Project[] = [
   },
 ];
 
+// Home "Selected work". Text stays close to CV bullets. Tags only name tech stated in the text.
+export const selectedWork: Work[] = [
+  {
+    title: 'OAuth2 connections service',
+    context: 'Make · 2024–2026',
+    text: "Owned the OAuth2 connections service for all supported third-party apps in Make's catalog. Authorization flows and token lifecycle management.",
+    tags: ['OAuth2'],
+  },
+  {
+    title: 'PostgreSQL standards and monitoring',
+    context: 'Make · 2024–2026',
+    text: 'Designed schemas and migrations that set new database standards for the engineering department. Built Postgres monitoring used by all engineering teams.',
+    tags: ['PostgreSQL', 'pg_cron', 'Datadog'],
+  },
+  {
+    title: 'Real-time scenario runs',
+    context: 'Make · 2024–2026',
+    text: 'Extended the event-driven streaming service that shows users all manually triggered scenario runs in real time.',
+    tags: ['Socket.IO', 'WebSockets'],
+  },
+  {
+    title: 'On-demand deployments',
+    context: 'Make · 2024–2026',
+    text: 'Part of a small team moving the platform from biweekly batch releases to on-demand deployments. Migrated all 5 services owned by my team.',
+    tags: ['Kubernetes', 'ArgoCD', 'CircleCI'],
+  },
+  {
+    title: 'Package sync service',
+    context: 'BSc thesis · deployed at Make',
+    text: 'Production Node.js service syncing 21,000+ component versions from Amazon EFS to EBS. Validation and automatic repair reach a 99.8% success rate.',
+    tags: ['Node.js', 'Amazon EFS', 'EBS'],
+  },
+];
+
 export const skills: Record<string, string[]> = {
   Languages: ['TypeScript', 'JavaScript', 'SQL', 'Java', 'Go', 'Rust (learning)', 'Python'],
   Backend: ['Node.js', 'Express.js', 'REST APIs', 'Microservices', 'Event-driven systems', 'OAuth2', 'WebSockets', 'gRPC/Protobuf'],
@@ -112,11 +147,6 @@ export const skills: Record<string, string[]> = {
 
 export const languages = ['Czech (native)', 'English'];
 
-export const now = [
-  'Learning Rust. Working through *Rust for Rustaceans* and building personal projects in it.',
-  'Building mini-lsm, an LSM-tree storage engine in Rust.',
-  'Reading distributed-systems books, MIT lectures and research papers. Going to meetups.',
-];
 
 /** Escape HTML, then render *text* as <em>. Only for trusted local strings. */
 export const inline = (s: string) =>

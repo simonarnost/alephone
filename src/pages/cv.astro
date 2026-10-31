@@ -62,6 +62,13 @@ import { SITE, SOCIALS } from '../site';
   </div>
 </Base>
 
+<script>
+  if (location.hash === '#print') {
+    history.replaceState(null, '', location.pathname);
+    window.addEventListener('load', () => setTimeout(() => window.print(), 300));
+  }
+</script>
+
 <style>
   .page-title {
     margin-bottom: 1rem;

@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import { now, interests, updated } from '../data/now';
+import { inline } from '../data/cv';
+
+const fmt = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long' });
+---
+
+<Base title="Now" description="What Šimon Arnošt is focused on right now.">
+  <header class="rise">
+    <p class="kicker">Now · updated <time datetime={updated.toISOString()}>{fmt.format(updated)}</time></p>
+    <h1 class="page-title">What I'm doing <em>now</em></h1>
+  </header>
+
+  <div class="rise">
+    <ul class="now">
+      {now.map((n) => <li set:html={inline(n)} />)}
+    </ul>
+
+    <h2 class="kicker sub">Interested in</h2>
+    <p class="interests">{interests.join(' · ')}</p>
+
+    <p class="note">
+      This is a <a href="https://nownownow.com/about">now page</a>. It says what I'm focused on at
+      this point.
+    </p>
+  </div>
+</Base>
+
+<style>
+  .now {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.9rem;
+    font-size: 1.125rem;
+  }
+  .now li {
+    position: relative;
+    padding-left: 1.75rem;
+  }
+  .now li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+  .sub {
+    margin: 3rem 0 0.75rem;
+  }
+  .interests {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 1.35rem;
+  }
+  .note {
+    margin-top: 3.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.85rem;
+    color: var(--faint);
+  }
+</style>

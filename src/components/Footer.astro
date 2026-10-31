@@ -1,10 +1,14 @@
 ---
-import { SITE } from '../site';
+import { SITE, SOCIALS, url } from '../site';
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer wrap">
   <span>© {year} {SITE.title}</span>
+  <nav class="links" aria-label="Elsewhere">
+    {SOCIALS.map((s) => <a href={s.url} rel="me noopener">{s.name}</a>)}
+    <a href={url('rss.xml')}>RSS</a>
+  </nav>
   <span class="clock" aria-label="Local time in Prague">
     Prague <time id="prague-time">--:--</time>
   </span>
@@ -34,6 +38,18 @@ const year = new Date().getFullYear();
     font: 0.75rem/1 var(--mono);
     color: var(--faint);
     letter-spacing: 0.02em;
+    flex-wrap: wrap;
+  }
+  .links {
+    display: flex;
+    gap: 1rem;
+  }
+  .links a {
+    text-decoration: none;
+    color: var(--muted);
+  }
+  .links a:hover {
+    color: var(--accent);
   }
   .clock time {
     color: var(--muted);
