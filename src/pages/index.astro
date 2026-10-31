@@ -1,0 +1,179 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import portrait from '../assets/portrait.jpeg';
+import { SITE, SOCIALS } from '../site';
+
+const posts = (await getCollection('posts', ({ data }) => import.meta.env.DEV || !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 5);
+---
+
+<Base>
+  <section class="hero rise">
+    <p class="kicker">ℵ₁ — {SITE.location}</p>
+    <h1 class="page-title">Simon <em>Arnost</em></h1>
+    <p class="lede">
+      {SITE.role} at <a href={SITE.company.url}>{SITE.company.name}</a>. I build software that
+      helps people automate the boring parts of their work.
+    </p>
+  </section>
+
+  <section class="about rise">
+    <figure class="portrait">
+      <Image src={portrait} alt="Portrait of Simon Arnost" widths={[240, 480]} sizes="240px" loading="eager" />
+    </figure>
+    <div class="bio">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat.
+      </p>
+      <p>
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+    </div>
+  </section>
+
+  {
+    posts.length > 0 && (
+      <section class="block rise">
+        <h2 class="kicker">Writing</h2>
+        <PostList posts={posts} />
+      </section>
+    )
+  }
+
+  <section class="block rise">
+    <h2 class="kicker">Elsewhere</h2>
+    <ul class="links">
+      {
+        SOCIALS.map((s) => (
+          <li>
+            <a href={s.url} rel="me noopener" target={s.url.startsWith('http') ? '_blank' : undefined}>
+              <span class="label">{s.name}</span>
+              <span class="handle">{s.handle}</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .hero .page-title {
+    font-size: clamp(3.25rem, 13vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+    margin-bottom: 1.5rem;
+  }
+  .lede {
+    font-size: clamp(1.2rem, 2.6vw, 1.45rem);
+    line-height: 1.5;
+    max-width: 34ch;
+    margin: 0 0 3.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .about {
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  .portrait {
+    margin: 0;
+    position: relative;
+  }
+  .portrait::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    border: 1px solid var(--accent);
+    translate: 8px 8px;
+    z-index: -1;
+    transition: translate 0.4s var(--ease);
+  }
+  .portrait:hover::after {
+    translate: 4px 4px;
+  }
+  .portrait :global(img) {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 14px;
+    filter: grayscale(1) contrast(1.05);
+    transition: filter 0.5s var(--ease);
+  }
+  .portrait:hover :global(img) {
+    filter: none;
+  }
+  .bio {
+    color: var(--muted);
+  }
+  .bio p:first-child {
+    margin-top: 0;
+  }
+
+  .block {
+    margin-top: 4.5rem;
+  }
+  .block > .kicker {
+    margin: 0 0 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .links a {
+    display: grid;
+    grid-template-columns: 7rem 1fr auto;
+    align-items: baseline;
+    padding-block: 0.8rem;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+  }
+  .label {
+    font-weight: 500;
+  }
+  .handle {
+    font: 0.85rem var(--mono);
+    color: var(--faint);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .arrow {
+    color: var(--faint);
+    transition: transform 0.3s var(--ease), color 0.2s;
+  }
+  .links a:hover .arrow {
+    color: var(--accent);
+    transform: translate(3px, -3px);
+  }
+  .links a:hover .handle {
+    color: var(--ink);
+  }
+
+  @media (max-width: 560px) {
+    .about {
+      grid-template-columns: 1fr;
+    }
+    .portrait {
+      max-width: 11rem;
+    }
+    .links a {
+      grid-template-columns: 5.5rem 1fr auto;
+    }
+  }
+</style>

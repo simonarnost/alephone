@@ -1,0 +1,42 @@
+---
+import { SITE } from '../site';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer wrap">
+  <span>© {year} {SITE.title}</span>
+  <span class="clock" aria-label="Local time in Prague">
+    Prague <time id="prague-time">--:--</time>
+  </span>
+</footer>
+
+<script>
+  const el = document.getElementById('prague-time');
+  if (el) {
+    const fmt = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Europe/Prague',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+    const tick = () => (el.textContent = fmt.format(new Date()));
+    tick();
+    setInterval(tick, 15_000);
+  }
+</script>
+
+<style>
+  .site-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 2rem 2.5rem;
+    border-top: 1px solid var(--line);
+    font: 0.75rem/1 var(--mono);
+    color: var(--faint);
+    letter-spacing: 0.02em;
+  }
+  .clock time {
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+</style>

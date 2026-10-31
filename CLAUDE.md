@@ -1,71 +1,29 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
-## Project Overview
-
-Hugo static site (personal portfolio) for Simon Arnost using the **PaperMod** theme — a fast, clean, responsive Hugo theme with dark/light mode support.
-
-**Requires:** Hugo Extended (minimum v0.146.0)
+Personal site of Simon Arnost. **Astro 7** static site, deployed to GitHub Pages at `https://simonarnost.github.io/alephone/` via `withastro/action` (`.github/workflows/deploy.yml`).
 
 ## Commands
 
 ```bash
-hugo server -D          # Dev server with drafts enabled (http://localhost:1313)
-hugo server             # Dev server without drafts
-hugo --minify           # Production build (output in public/)
-hugo new content/<path> # Create new content with front matter from archetypes/
+npm run dev      # http://localhost:4321/alephone/ (drafts visible)
+npm run build    # astro check + build → dist/
+npm run preview  # serve dist/
 ```
 
-No npm/build scripts — Hugo CLI is the only build tool needed.
+## Structure
 
-## Architecture
+- `src/site.ts` — site metadata, socials, `url()` helper. **Always build internal links with `url()`** (site lives under `base: '/alephone'`).
+- `src/data/cv.ts` — CV entries (typed). Rendered by `src/pages/cv.astro`.
+- `src/content/posts/*.md` — blog posts; schema in `src/content.config.ts` (`title`, `date`, `description?`, `tags`, `draft`). Drafts excluded from prod builds; "Writing" nav link appears only when published posts exist.
+- `src/layouts/Base.astro` — HTML shell, SEO meta, pre-paint theme script.
+- `src/components/` — Header, Footer (Prague clock), ThemeToggle, PostList.
+- `src/styles/global.css` — design tokens, base, prose, print styles.
 
-### Theme Setup
+## Design system
 
-PaperMod is installed as a git submodule at `themes/papermod/`. Other themes (`themes/noir/`, `themes/ink/`) may exist but are unused.
-
-`hugo.toml` sets `theme = 'papermod'`.
-
-### Site Structure
-
-- **Homepage:** Profile mode (centered title, subtitle, buttons, social icons)
-- **CV page:** Custom layout at `layouts/cv/single.html` with right-aligned dates (inspired by thesquareplanet.com)
-- **Contact page:** Simple content page
-- **Footer:** Overridden at `layouts/partials/footer.html` (shows year only)
-
-### Content Pages
-
-- `content/cv.md` — CV (uses `type: cv` for custom layout)
-- `content/contact.md` — Contact info
-- `content/about.md` — About page
-- `content/posts/` — Blog posts
-
-### Theme Customization
-
-Do **not** edit files in `themes/papermod/` directly. Instead:
-- **Layout overrides:** place files in `layouts/` with same path as theme
-- **Custom CSS:** add files to `assets/css/extended/` (auto-bundled)
-- **Custom head/footer HTML:** create `layouts/partials/extend_head.html` or `extend_footer.html`
-- **Custom page types:** set `type` in front matter, create `layouts/<type>/single.html`
-
-### PaperMod CSS Variables
-
-Use these in custom layouts to stay consistent with the theme:
-`--primary`, `--secondary`, `--tertiary`, `--content`, `--theme`, `--entry`, `--code-bg`, `--border`, `--gap`
-
-### Front Matter Format
-
-```yaml
----
-title: "Post Title"
-date: 2026-01-15
-draft: true
-tags: ["tag1"]
-hidemeta: true
----
-```
-
-### Hugo TOML Notes
-
-- `paginate` is deprecated since Hugo v0.128.0 — use `[pagination] pagerSize = 10`
+- Fonts (self-hosted via `@fontsource-variable`): Fraunces (headings, `--serif`), Inter (body, `--sans`), JetBrains Mono (meta/dates, `--mono`).
+- Color tokens (OKLCH) on `:root` / `:root[data-theme='dark']`: `--bg`, `--surface`, `--ink`, `--muted`, `--faint`, `--line`, `--accent`.
+- Theme: `data-theme` on `<html>`, stored in `localStorage.theme`, falls back to system preference.
+- Utilities: `.wrap` (centered column), `.kicker` (mono label), `.page-title` (serif display, `<em>` = accent italic), `.rise` (staggered entrance on children), `.prose` (post body).
+- Page transitions: CSS cross-document `@view-transition` (no JS router).
+- Component styles are scoped `<style>` blocks inside `.astro` files.

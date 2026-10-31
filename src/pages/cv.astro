@@ -1,0 +1,143 @@
+---
+import Base from '../layouts/Base.astro';
+import { experience, education, type Entry } from '../data/cv';
+
+const sections: { label: string; entries: Entry[] }[] = [
+  { label: 'Experience', entries: experience },
+  { label: 'Education', entries: education },
+];
+---
+
+<Base title="CV" description="Experience and education of Simon Arnost.">
+  <header class="rise">
+    <p class="kicker">Curriculum vitae</p>
+    <h1 class="page-title">Work &amp; <em>study</em></h1>
+  </header>
+
+  <div class="cv rise">
+    {
+      sections.map(({ label, entries }) => (
+        <section>
+          <h2 class="kicker">{label}</h2>
+          <div class="entries">
+            {entries.map((e) => (
+              <article class="entry">
+                <h3>{e.url ? <a href={e.url}>{e.org}</a> : e.org}</h3>
+                {e.summary && <p class="summary">{e.summary}</p>}
+                <ol class="roles">
+                  {e.roles.map((r) => (
+                    <li class:list={{ current: r.current }}>
+                      <span class="role">{r.title}</span>
+                      <span class="leader" aria-hidden="true" />
+                      <span class="dates">{r.dates}</span>
+                    </li>
+                  ))}
+                </ol>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))
+    }
+  </div>
+</Base>
+
+<style>
+  .cv section {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr;
+    gap: 1.5rem;
+    padding-block: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  .cv section > .kicker {
+    margin: 0.55rem 0 0;
+    position: sticky;
+    top: 1.5rem;
+    align-self: start;
+  }
+  .entries {
+    min-width: 0;
+    display: grid;
+    gap: 2.5rem;
+  }
+  h3 {
+    font-size: 1.45rem;
+    margin: 0 0 0.6rem;
+    font-variation-settings: 'SOFT' 100, 'opsz' 48;
+  }
+  h3 a {
+    text-decoration: none;
+  }
+  .summary {
+    margin: 0 0 1rem;
+    color: var(--muted);
+    max-width: 52ch;
+  }
+  .roles {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.35rem;
+  }
+  .roles li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+  }
+  .roles li:not(.current) .role {
+    color: var(--muted);
+  }
+  .current .role {
+    font-weight: 500;
+  }
+  .current .role::before {
+    content: '';
+    display: inline-block;
+    width: 0.45rem;
+    height: 0.45rem;
+    margin-right: 0.55rem;
+    border-radius: 50%;
+    background: var(--accent);
+    vertical-align: 0.1em;
+    box-shadow: 0 0 0 0 var(--accent);
+    animation: pulse 2.4s infinite;
+  }
+  @keyframes pulse {
+    70% {
+      box-shadow: 0 0 0 6px transparent;
+    }
+    100% {
+      box-shadow: 0 0 0 0 transparent;
+    }
+  }
+  .leader {
+    flex: 1;
+    min-width: 1rem;
+    border-bottom: 1px dotted var(--line);
+    translate: 0 -0.3em;
+  }
+  .dates {
+    font: 0.8rem var(--mono);
+    color: var(--faint);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 640px) {
+    .cv section {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .cv section > .kicker {
+      position: static;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .current .role::before {
+      animation: none;
+    }
+  }
+</style>

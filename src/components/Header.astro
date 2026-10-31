@@ -1,0 +1,95 @@
+---
+import { getCollection } from 'astro:content';
+import ThemeToggle from './ThemeToggle.astro';
+import { url } from '../site';
+
+const posts = await getCollection('posts', ({ data }) => import.meta.env.DEV || !data.draft);
+const nav = [
+  { label: 'CV', href: url('cv/') },
+  ...(posts.length ? [{ label: 'Writing', href: url('writing/') }] : []),
+];
+const path = Astro.url.pathname.replace(/\/?$/, '/');
+---
+
+<header class="site-header wrap">
+  <a class="mark" href={url()} aria-label="Home">
+    <span class="glyph" aria-hidden="true">ℵ<sub>1</sub></span>
+    <span class="name">Simon Arnost</span>
+  </a>
+  <nav aria-label="Main">
+    {
+      nav.map((n) => (
+        <a href={n.href} aria-current={path.startsWith(n.href) ? 'page' : undefined}>
+          {n.label}
+        </a>
+      ))
+    }
+    <ThemeToggle />
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1.5rem;
+    view-transition-name: site-header;
+  }
+  .mark {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    text-decoration: none;
+  }
+  .glyph {
+    font: 400 1.75rem/1 var(--serif);
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+    color: var(--accent);
+    transition: transform 0.4s var(--ease);
+  }
+  .glyph sub {
+    font-size: 0.45em;
+    vertical-align: baseline;
+    margin-left: 0.05em;
+  }
+  .mark:hover .glyph {
+    transform: rotate(-8deg);
+  }
+  .name {
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    font-size: 0.9rem;
+  }
+  nav a {
+    text-decoration: none;
+    color: var(--muted);
+    position: relative;
+  }
+  nav a:hover,
+  nav a[aria-current] {
+    color: var(--ink);
+  }
+  nav a[aria-current]::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: -0.3rem;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--accent);
+  }
+  @media (max-width: 420px) {
+    .name {
+      display: none;
+    }
+  }
+</style>
