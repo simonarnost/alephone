@@ -19,15 +19,15 @@ npm run preview  # serve dist/
 - `src/site.ts` — site metadata, socials, `url()` helper. **Always build internal links with `url()`** (site lives under `base: '/alephone'`).
 - `src/data/cv.ts` — CV experience and education (one brief `summary` per role; owner keeps the full CV elsewhere), projects (home), unused `selectedWork` (typed).
 - `src/data/now.ts` — `/now` page items + `updated` date (bump on every change; shown on home and /now).
-- Home (`src/pages/index.astro`): hero + action buttons, bio/portrait only. Projects at `/projects`, Now at `/now`. No blog/RSS (owner does not want them). `SelectedWork` component + `selectedWork` data exist but are unused (removed from home on request; may return).
+- Home (`src/pages/index.astro`): hero + action buttons, cat drawing + bio (bio links to Projects, Now, CV). Projects at `/projects`, Now at `/now`. No blog/RSS (owner does not want them). `SelectedWork` component + `selectedWork` data exist but are unused (removed from home on request; may return).
 - `src/layouts/Base.astro` — HTML shell, SEO meta, pre-paint theme script.
-- `src/components/` — Header, Footer (socials, Prague clock), ThemeToggle, ProjectList, CvEntry, SelectedWork.
+- `src/components/` — Header, Footer (socials, Prague clock), ThemeToggle, Cat (inline SVG, theme-coloured, idle + hover animations), ProjectList, CvEntry, SelectedWork. Header home link is a plain ℵ₁ glyph (no name).
 - `src/styles/global.css` — design tokens, base, print styles.
 
 ## Design system
 
-- Fonts (self-hosted via `@fontsource-variable`): Fraunces (headings, `--serif`), Inter (body, `--sans`), JetBrains Mono (meta/dates, `--mono`).
-- Color tokens (OKLCH) on `:root` / `:root[data-theme='dark']`: `--bg`, `--surface`, `--ink`, `--muted`, `--faint`, `--line`, `--accent`.
+- Fonts (self-hosted via `@fontsource-variable`): EB Garamond (name/headings, `--serif`), Inter (body, `--sans`), JetBrains Mono (meta/dates, `--mono`).
+- Color tokens (OKLCH) on `:root` / `:root[data-theme='dark']`: `--bg`, `--surface`, `--ink`, `--muted`, `--faint`, `--line`, `--accent`. Palette "midnight": light = cream paper with navy text (accent = navy), dark = midnight blue with cream accent.
 - Theme: `data-theme` on `<html>`, stored in `localStorage.theme`, falls back to system preference.
 - Utilities: `.wrap` (centered column), `.kicker` (mono label), `.page-title` (serif display, `<em>` = accent italic), `.rise` (staggered entrance on children).
 - Page transitions: CSS cross-document `@view-transition` (no JS router).

@@ -1,21 +1,21 @@
-@import '@fontsource-variable/fraunces/full.css';
-@import '@fontsource-variable/fraunces/full-italic.css';
+@import '@fontsource-variable/eb-garamond/wght.css';
+@import '@fontsource-variable/eb-garamond/wght-italic.css';
 @import '@fontsource-variable/inter';
 @import '@fontsource-variable/jetbrains-mono';
 
 /* ---------- tokens ---------- */
 :root {
-  --serif: 'Fraunces Variable', ui-serif, Georgia, serif;
+  --serif: 'EB Garamond Variable', ui-serif, Georgia, serif;
   --sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --mono: 'JetBrains Mono Variable', ui-monospace, monospace;
 
-  --bg: oklch(97.6% 0.008 85);
-  --surface: oklch(94.5% 0.01 85);
-  --ink: oklch(21% 0.012 60);
-  --muted: oklch(46% 0.012 60);
-  --faint: oklch(62% 0.01 70);
-  --line: oklch(87% 0.012 80);
-  --accent: oklch(58% 0.19 36);
+  --bg: oklch(97.5% 0.008 90);
+  --surface: oklch(94% 0.012 90);
+  --ink: oklch(26% 0.07 260);
+  --muted: oklch(42% 0.05 260);
+  --faint: oklch(58% 0.03 260);
+  --line: oklch(87% 0.015 250);
+  --accent: oklch(26% 0.07 260);
   --grain: 0.05;
 
   --measure: 44rem;
@@ -26,13 +26,13 @@
 }
 
 :root[data-theme='dark'] {
-  --bg: oklch(16.5% 0.006 60);
-  --surface: oklch(21% 0.008 60);
-  --ink: oklch(93% 0.012 85);
-  --muted: oklch(72% 0.01 80);
-  --faint: oklch(55% 0.01 70);
-  --line: oklch(29% 0.008 60);
-  --accent: oklch(73% 0.15 48);
+  --bg: oklch(16% 0.035 262);
+  --surface: oklch(21% 0.04 262);
+  --ink: oklch(94% 0.012 90);
+  --muted: oklch(77% 0.02 250);
+  --faint: oklch(58% 0.03 258);
+  --line: oklch(28% 0.04 262);
+  --accent: oklch(86% 0.05 90);
   --grain: 0.07;
   color-scheme: dark;
 }
@@ -106,7 +106,6 @@ h3 {
   font-weight: 400;
   line-height: 1.1;
   letter-spacing: -0.02em;
-  font-variation-settings: 'SOFT' 50, 'WONK' 0;
   text-wrap: balance;
 }
 
@@ -157,7 +156,6 @@ main {
 .page-title {
   font-size: clamp(2.5rem, 7vw, 3.75rem);
   margin: 0.6rem 0 2.5rem;
-  font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144;
 }
 .page-title em {
   color: var(--accent);

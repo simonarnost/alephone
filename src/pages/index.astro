@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import Portrait from '../components/Portrait.astro';
+import Cat from '../components/Cat.astro';
 import { SOCIALS, url } from '../site';
 
 const external = SOCIALS.filter((s) => s.name !== 'Email');
@@ -31,7 +31,7 @@ const email = SOCIALS.find((s) => s.name === 'Email')!;
   </section>
 
   <section class="about rise">
-    <Portrait />
+    <Cat />
     <div class="bio">
       <p>
         For five years I was at <a href="https://www.make.com">Make</a>. I joined when it was still
@@ -52,9 +52,9 @@ const email = SOCIALS.find((s) => s.name === 'Email')!;
 
 <style>
   .hero .page-title {
-    font-size: clamp(3.25rem, 13vw, 6.5rem);
+    font-size: clamp(3.5rem, 14vw, 7rem);
     line-height: 0.95;
-    letter-spacing: -0.045em;
+    letter-spacing: -0.03em;
     padding-top: 0.12em;
     margin-bottom: 1.5rem;
   }
@@ -113,13 +113,9 @@ const email = SOCIALS.find((s) => s.name === 'Email')!;
 
   .about {
     display: grid;
-    grid-template-columns: 11rem 1fr;
-    gap: 2.5rem;
-    align-items: center;
-  }
-  :global([data-portrait='cat']) .about {
     grid-template-columns: 13.5rem 1fr;
     gap: 2rem;
+    align-items: center;
   }
   .bio {
     color: var(--muted);
@@ -135,13 +131,7 @@ const email = SOCIALS.find((s) => s.name === 'Email')!;
     .about {
       grid-template-columns: 1fr;
     }
-    .about :global(.portrait) {
-      max-width: 11rem;
-    }
-    :global([data-portrait='cat']) .about {
-      grid-template-columns: 1fr;
-    }
-    :global([data-portrait='cat']) .about :global(.portrait) {
+    .about :global(.cat) {
       max-width: 13rem;
     }
   }

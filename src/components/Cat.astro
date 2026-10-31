@@ -1,0 +1,159 @@
+---
+// Home page cat. Colours come from the theme tokens (--ink, --bg, --accent).
+// Idle: tail sway + blink. Hover: happy eyes, head tilt, tail wag, whisker twitch.
+---
+
+<figure class="cat">
+  <svg viewBox="32 20 198 224" role="img" aria-label="Drawing of a grey cat">
+    <g stroke-linecap="round" stroke-linejoin="round">
+      <!-- tail: outline pass + fur pass -->
+      <g class="tail">
+        <path class="tail-o" d="M164 226 C198 228 214 204 207 180 C204 170 206 158 215 154" />
+        <path class="tail-f" d="M164 226 C198 228 214 204 207 180 C204 170 206 158 215 154" />
+      </g>
+      <g class="body">
+        <path class="fur" d="M84 132 L80 152 C60 174 56 212 68 228 Q72 234 84 234 L156 234 Q168 234 172 228 C184 212 180 174 160 152 L156 132 Z" />
+        <path class="fur line" d="M80 152 C60 174 56 212 68 228 Q72 234 84 234 L91 234 Q91 241 101.5 241 Q112 241 112 234 L128 234 Q128 241 138.5 241 Q149 241 149 234 L156 234 Q168 234 172 228 C184 212 180 174 160 152" />
+        <path class="line" fill="none" d="M91 198 Q90 216 91 234 M112 205 Q112.5 220 112 234 M128 205 Q127.5 220 128 234 M149 198 Q150 216 149 234" />
+        <path class="line thin" fill="none" d="M98 236 L98 240 M105 236 L105 240 M135 236 L135 240 M142 236 L142 240" />
+      </g>
+      <g class="head">
+        <path class="fur line" d="M58 128 C44 108 46 76 62 58 L64 34 Q66 26 74 30 L96 46 C110 42 130 42 144 46 L166 30 Q174 26 176 34 L178 58 C194 76 196 108 182 128 C166 152 74 152 58 128 Z" />
+        <path class="ear-in" d="M70 40 L71 55 L86 47 Z M170 40 L169 55 L154 47 Z" />
+        <g class="eyes-open">
+          <ellipse cx="98" cy="98" rx="5.5" ry="7" />
+          <ellipse cx="142" cy="98" rx="5.5" ry="7" />
+        </g>
+        <path class="eyes-happy line" fill="none" d="M92 100 Q98 91 104 100 M136 100 Q142 91 148 100" />
+        <path class="nose" d="M115 107 Q120 105 125 107 Q122 112 120 112 Q118 112 115 107 Z" />
+        <path class="line mouth" fill="none" d="M108 114 Q114 122 120 113 Q126 122 132 114" />
+        <path class="line whiskers" fill="none" d="M40 102 L70 107 M42 116 L70 113 M200 102 L170 107 M198 116 L170 113" />
+      </g>
+    </g>
+  </svg>
+</figure>
+
+<style>
+  .cat {
+    margin: 0;
+    color: var(--ink);
+  }
+  .cat svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .cat {
+    --fur: color-mix(in oklch, var(--ink) 13%, var(--bg));
+  }
+  .cat * {
+    transform-box: view-box;
+  }
+  .cat .line {
+    stroke: var(--ink);
+    stroke-width: 3.4;
+  }
+  .cat .thin {
+    stroke-width: 2.2;
+  }
+  .cat .whiskers {
+    stroke-width: 2;
+    transform-origin: 120px 110px;
+  }
+  .cat .mouth {
+    stroke-width: 2.6;
+  }
+  .cat .fur {
+    fill: var(--fur);
+  }
+  .cat .ear-in {
+    fill: color-mix(in oklch, var(--accent) 45%, var(--bg));
+  }
+  .cat .tail-o,
+  .cat .tail-f {
+    fill: none;
+  }
+  .cat .tail-o {
+    stroke: var(--ink);
+    stroke-width: 17;
+  }
+  .cat .tail-f {
+    stroke: var(--fur);
+    stroke-width: 10.2;
+  }
+  .cat .eyes-open {
+    fill: var(--ink);
+    transform-origin: 120px 98px;
+  }
+  .cat .nose {
+    fill: var(--ink);
+  }
+  .cat .eyes-happy {
+    opacity: 0;
+  }
+  .cat .eyes-open,
+  .cat .eyes-happy {
+    transition: opacity 0.15s;
+  }
+  .cat .head {
+    transform-origin: 120px 146px;
+    transition: transform 0.5s var(--ease);
+  }
+  .cat .tail {
+    transform-origin: 164px 226px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .cat .tail {
+      animation: sway 4s ease-in-out infinite;
+    }
+    .cat .eyes-open {
+      animation: blink 5s infinite;
+    }
+    .cat:hover .tail {
+      animation: wag 0.45s ease-in-out infinite;
+    }
+    .cat:hover .whiskers {
+      animation: twitch 0.6s ease-in-out 2;
+    }
+  }
+  .cat:hover .head {
+    transform: rotate(-5deg);
+  }
+  .cat:hover .eyes-open {
+    opacity: 0;
+  }
+  .cat:hover .eyes-happy {
+    opacity: 1;
+  }
+  @keyframes sway {
+    50% {
+      transform: rotate(-5deg);
+    }
+  }
+  @keyframes wag {
+    0%,
+    100% {
+      transform: rotate(3deg);
+    }
+    50% {
+      transform: rotate(-10deg);
+    }
+  }
+  @keyframes blink {
+    0%,
+    94%,
+    100% {
+      transform: scaleY(1);
+    }
+    97% {
+      transform: scaleY(0.1);
+    }
+  }
+  @keyframes twitch {
+    50% {
+      transform: scaleY(0.9) translateY(1px);
+    }
+  }
+</style>
