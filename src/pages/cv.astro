@@ -2,18 +2,13 @@
 import Base from '../layouts/Base.astro';
 import CvEntry from '../components/CvEntry.astro';
 import { experience, education } from '../data/cv';
-import { SITE, SOCIALS } from '../site';
+import { SITE } from '../site';
 ---
 
 <Base title="CV" description="Experience and education of Šimon Arnošt.">
   <header class="rise">
     <p class="print-name">{SITE.title}</p>
-    <p class="kicker">Curriculum vitae</p>
-    <h1 class="page-title">Work &amp; <em>study</em></h1>
-    <p class="contact">
-      <span>{SITE.location}</span>
-      {SOCIALS.map((s) => <a href={s.url}>{s.name === 'Email' ? s.handle : s.name}</a>)}
-    </p>
+    <h1 class="kicker">Curriculum vitae</h1>
   </header>
 
   <div class="cv rise">
@@ -30,19 +25,11 @@ import { SITE, SOCIALS } from '../site';
 </Base>
 
 <style>
-  .page-title {
-    margin-bottom: 1rem;
-  }
   .print-name {
     display: none;
   }
-  .contact {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem 1.1rem;
-    margin: 0 0 3rem;
-    font-size: 0.9rem;
-    color: var(--muted);
+  header .kicker {
+    margin: 0 0 2rem;
   }
 
   .cv section {
@@ -77,9 +64,6 @@ import { SITE, SOCIALS } from '../site';
       display: block;
       font: 400 2.25rem/1 var(--serif);
       margin: 0 0 0.5rem;
-    }
-    .page-title {
-      display: none;
     }
     .cv section {
       padding-block: 1.25rem;

@@ -5,7 +5,7 @@ import ProjectList from '../components/ProjectList.astro';
 import portrait from '../assets/portrait.jpeg';
 import { inline } from '../data/cv';
 import { now, updated } from '../data/now';
-import { SITE, SOCIALS, url } from '../site';
+import { SOCIALS, url } from '../site';
 
 const updatedLabel = new Intl.DateTimeFormat('en-GB', { month: 'short', year: 'numeric' }).format(updated);
 const external = SOCIALS.filter((s) => s.name !== 'Email');
@@ -14,7 +14,6 @@ const email = SOCIALS.find((s) => s.name === 'Email')!;
 
 <Base>
   <section class="hero rise">
-    <p class="kicker">ℵ₁ — {SITE.location}</p>
     <h1 class="page-title">Šimon <em>Arnošt</em></h1>
     <p class="lede">
       I'm a software engineer in Prague. I work mostly on backend services and databases. Lately

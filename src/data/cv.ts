@@ -8,7 +8,6 @@ export type Project = { name: string; lang: string; blurb: string; url?: string;
 export const experience: Entry[] = [
   {
     org: 'Make',
-    tagline: 'Workflow automation platform',
     url: 'https://www.make.com',
     dates: 'May 2021 – May 2026',
     roles: [
@@ -16,18 +15,19 @@ export const experience: Entry[] = [
         title: 'Software Engineer',
         dates: 'Sep 2024 – May 2026',
         summary:
-          'Owned the OAuth2 connections service. Set new PostgreSQL standards and built Postgres monitoring used by all engineering teams. Part of a small team moving the platform to on-demand deployments.',
+          "Responsible for backend services from the first design doc to running them in production. Cared most about shipping often without breaking things and about being able to see what a system is doing. That pulled me into release engineering, observability and architecture work across teams.",
       },
       {
         title: 'Junior Software Engineer',
         dates: 'Feb 2022 – Sep 2024',
         summary:
-          'Moved from QA into backend engineering. Owned Node.js/TypeScript services and PostgreSQL changes on the core platform team.',
+          "From testing the platform to building it. Shipped Node.js and TypeScript services on the core platform team, including the package sync service that later became my thesis.",
       },
       {
         title: 'QA Engineer',
         dates: 'May 2021 – Feb 2022',
-        summary: 'Defined the end-to-end testing strategy and built the automated test suite in Cypress from scratch.',
+        summary:
+          "Back when Make was still Integromat, I joined the Runway team to look after the app landing pages. There were no end-to-end tests yet, so the Cypress suite started from an empty repo.",
       },
     ],
   },
@@ -37,7 +37,8 @@ export const experience: Entry[] = [
       {
         title: 'Junior Web Developer',
         dates: 'Sep 2019 – Aug 2020',
-        summary: 'Built internal Angular and Java (Spring) tools for enterprise clients, including Česká spořitelna.',
+        summary:
+          "First job in software, next to university. Internal Angular and Spring tools for enterprise clients, Česká spořitelna among them.",
       },
     ],
   },
@@ -53,13 +54,9 @@ export const education: Entry[] = [
         title: 'BSc, Software Engineering',
         dates: '2025',
         summary:
-          "Thesis: *Package management and synchronization service for Make*. Deployed in Make's production infrastructure.",
+          "A thesis that shipped. *Package management and synchronization service for Make* keeps 21,000+ component versions in sync between Amazon EFS and EBS and repairs broken copies on its own. It runs in Make's production at a 99.8% success rate.",
       },
     ],
-  },
-  {
-    org: 'Gymnázium Třeboň',
-    roles: [{ title: 'High school', dates: '2014 – 2018' }],
   },
 ];
 
