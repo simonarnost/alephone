@@ -4,7 +4,6 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
 import ProjectList from '../components/ProjectList.astro';
-import SelectedWork from '../components/SelectedWork.astro';
 import portrait from '../assets/portrait.jpeg';
 import { inline } from '../data/cv';
 import { now, updated } from '../data/now';
@@ -53,16 +52,11 @@ const email = SOCIALS.find((s) => s.name === 'Email')!;
         platform. I started in QA and ended up owning production TypeScript and Node.js services on
         AWS and Kubernetes.
       </p>
-      <p>Most of that work was backend services, PostgreSQL, and event-driven systems.</p>
+      <p>
+        Most of that work was backend services, PostgreSQL, and event-driven systems. More in my <a
+          href={url('cv/')}>CV</a>.
+      </p>
     </div>
-  </section>
-
-  <section class="block rise">
-    <div class="block-head">
-      <h2 class="kicker">Selected work</h2>
-      <a class="more" href={url('cv/')}>Full CV →</a>
-    </div>
-    <SelectedWork />
   </section>
 
   <section class="block rise">

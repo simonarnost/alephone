@@ -19,7 +19,7 @@ npm run preview  # serve dist/
 - `src/site.ts` — site metadata, socials, `url()` helper. **Always build internal links with `url()`** (site lives under `base: '/alephone'`).
 - `src/data/cv.ts` — CV experience, education, projects, skills, home "Selected work" (typed).
 - `src/data/now.ts` — `/now` page items + `updated` date (bump on every change; shown on home and /now).
-- Home (`src/pages/index.astro`): hero + action buttons, bio, Selected work, Projects, Now teaser, Writing (only if published posts).
+- Home (`src/pages/index.astro`): hero + action buttons, bio, Projects, Now teaser, Writing (only if published posts). `SelectedWork` component + `selectedWork` data exist but are unused (removed from home on request; may return).
 - `cv/#print` opens the browser print dialog (used by the home "PDF" button). `inline()` renders `*italic*`. Rendered by `src/pages/cv.astro`, `CvEntry`, `ProjectList`, and home.
 - `src/content/posts/*.md` — blog posts; schema in `src/content.config.ts` (`title`, `date`, `description?`, `tags`, `draft`). Drafts excluded from prod builds; "Writing" nav link appears only when published posts exist.
 - `src/layouts/Base.astro` — HTML shell, SEO meta, pre-paint theme script.
